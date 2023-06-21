@@ -1,0 +1,17 @@
+{
+    "name": "Chocolate Brownies",
+    "category": "Desserts",
+    "rating": 4,
+    "yield": "20 pieces",
+    "items": [
+        {
+            "name": "",
+            "ingredients": ["Maida", "Eggs"],
+            "quantities": ["50g", "2"]
+        }
+    ],
+    "instructions": "Please do this and then do that and then that and so on and so forth",
+    "review": "Amazing flavor!",
+    "previous": null,
+    "next": null
+}
