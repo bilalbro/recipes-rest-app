@@ -69,10 +69,7 @@ class RecipesDatabase {
         await db.query(
             `UPDATE recipes SET next=${newRecipeId} WHERE id=${id}`
         );
-
-        return {
-            id: newRecipeId
-        };
+        return newRecipeId;
     }
 
     async copy(id) {
@@ -180,6 +177,13 @@ class RecipesDatabase {
             `SELECT * FROM ${this.tableName} WHERE id=${id}`
         );
         return results.length !== 0;
+    }
+
+    async isEmpty() {
+        var [results] = await db.query(
+            `SELECT COUNT(*) AS count FROM ${this.tableName}`
+        );
+        return results[0].count === 0;
     }
 
     async restore(dataSet) {

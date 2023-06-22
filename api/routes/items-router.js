@@ -4,6 +4,45 @@ const { ingredientsDb, categoriesDb } = require('../db/items');
 const { ingredientsValidator, categoriesValidator } = require('../errors/items');
 
 
+async function checkNoRecipes(req, res, next) {
+    const error = await req.data.validator.validateNoRecipes();
+    if (error) {
+        next(error);
+        return
+    }
+    next();
+}
+
+async function checkNoUsage(req, res, next) {
+    const error = await req.data.validator.validateNoUsage(req.params.id);
+    if (error) {
+        next(error);
+        return;
+    }
+    next();
+}
+
+async function checkId(req, res, next) {
+    const error = await req.data.validator.validateId(req.params.id);
+    if (error) {
+        next(error);
+        return;
+    }
+    next();
+}
+
+async function checkName(req, res, next) {
+    const error = await req.data.validator.validateName(req.body.name);
+    if (error) {
+        next(error);
+        return;
+    }
+    else {
+        next();
+    }
+}
+
+
 async function getAll(req, res) {
     const results = await req.data.db.getAll();
     res.json(results);
@@ -11,42 +50,22 @@ async function getAll(req, res) {
 
 async function deleteAll(req, res) {
     await req.data.db.deleteAll();
-    res.send('deleted everything');
+    res.status(204).send();
 }
 
 async function add(req, res) {
     const id = await req.data.db.add(req.body.name);
-    res.json({ id });
+    res.status(201).json({ id });
 }
 
 async function update(req, res) {
     await req.data.db.update(req.params.id, req.body.name);
-    res.send('updated')
+    res.status(204).send()
 }
 
 async function deleteItem(req, res) {
     await req.data.db.delete(req.params.id);
-    res.send('deleted');
-}
-
-async function checkId(req, res, next) {
-    const error = await req.data.validator.validateId(req.params.id);
-    if (error) {
-        res.status(error.status).json(error.error);
-    }
-    else {
-        next();
-    }
-}
-
-async function checkName(req, res, next) {
-    const error = await req.data.validator.validateName(req.body.name);
-    if (error) {
-        res.status(error.status).json(error.error);
-    }
-    else {
-        next();
-    }
+    res.status(204).send();
 }
 
 
@@ -72,10 +91,10 @@ exports.itemsRouter = (tableName) => {
     });
 
     subapp.get(`/${tableName}`, getAll);
-    subapp.delete(`/${tableName}`, deleteAll);
+    subapp.delete(`/${tableName}`, checkNoRecipes, deleteAll);
     subapp.post(`/${tableName}`, checkName, add);
     subapp.put(`/${tableName}/:id`, checkId, checkName, update);
-    subapp.delete(`/${tableName}/:id`, checkId, deleteItem);
+    subapp.delete(`/${tableName}/:id`, checkId, checkNoUsage, deleteItem);
 
     return subapp;
 }

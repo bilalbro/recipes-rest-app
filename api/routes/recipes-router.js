@@ -107,8 +107,8 @@ async function get(req, res) {
 }
 
 async function iterate(req, res) {
-    const result = await recipesDb.iterate(req.params.id);
-    res.json(result);
+    const id = await recipesDb.iterate(req.params.id);
+    res.json({ id });
 }
 
 async function copy(req, res) {
@@ -118,22 +118,22 @@ async function copy(req, res) {
 
 async function add(req, res) {
     const id = await recipesDb.add(req.body);
-    res.json({ id });
+    res.status(201).json({ id });
 }
 
 async function deleteAll(req, res) {
     await recipesDb.deleteAll();
-    res.send('deleted all recipes');
+    res.status(204).send();
 }
 
 async function deleteRecipe(req, res) {
     await recipesDb.delete(req.params.id);
-    res.send('deleted recipe');
+    res.status(204).send();
 }
 
 async function update(req, res) {
     await recipesDb.update(req.params.id, req.body);
-    res.send('updated');
+    res.status(204).send();
 }
 
 
@@ -171,10 +171,5 @@ subapp.put('/recipes/:id',
 
     update
 );
-
-
-subapp.use((error, req, res, next) => {
-    res.status(error.status).json(error.error);
-});
 
 module.exports = subapp;

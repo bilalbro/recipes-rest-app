@@ -24,8 +24,18 @@ app.use(restorationRouter);
 app.use(recipesRouter);
 app.use(itemsRouter('ingredients'));
 app.use(itemsRouter('categories'));
-// app.use(new ItemsRouter('ingredients').router());
-// app.use(new ItemsRouter('categories').router());
+
+
+// If the thrown error is one of our custom errors, we'll handle it.
+// Otherwise, we'll just relay it to Express's default error handler.
+app.use((error, req, res, next) => {
+    if (error.status && error.error) {
+        res.status(error.status).json(error.error);
+    }
+    else {
+        next(error);
+    }
+});
 
 app.listen(port, () => {
     console.log(`Started listening on port ${port}.`);

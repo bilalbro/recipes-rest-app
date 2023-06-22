@@ -1,4 +1,5 @@
 const { ingredientsDb, categoriesDb } = require('../db/items');
+const { recipesDb } = require('../db/recipes');
 const { composeError } = require('./compose-error');
 
 
@@ -6,6 +7,31 @@ class ItemsValidator {
     constructor(db, type) {
         this.db = db;
         this.type = type;
+    }
+
+    async validateNoRecipes() {
+        // Are there any recipes or not?
+        const isEmpty = await recipesDb.isEmpty();
+        if (!isEmpty) {
+            return composeError(
+                409,
+                'ITEM_IN_USE_ERROR',
+                `Can't delete all ${this.type} items because some are in use.`
+            )
+        }
+        return false;
+    }
+
+    async validateNoUsage(id) {
+        const result = await this.db.get(id);
+        if (result.usage !== 0) {
+            return composeError(
+                409,
+                `ITEM_IN_USE_ERROR`,
+                `Can't delete ${this.type} with id '${id}' as its in use.`
+            )
+        }
+        return false;
     }
 
     async validateId(id) {

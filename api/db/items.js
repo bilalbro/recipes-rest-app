@@ -21,6 +21,14 @@ class ItemsDatabase {
         }
     }
 
+    async get(id) {
+        var [results] = await db.query(
+            `SELECT * FROM ${this.tableName}_vw
+            WHERE id=${id}`
+        );
+        return results[0];
+    }
+
     async deleteAll() {
         await db.query(`DELETE FROM ${this.tableName}`);
     }
