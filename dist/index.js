@@ -35562,7 +35562,7 @@
 	  return clone;
 	}
 
-	var unitMap = {
+	const unitMap = {
 	  'tsp': 1,
 	  // Goes to 'tsp'
 	  'tbsp': 3,
@@ -35589,1087 +35589,376 @@
 	  // Throw away the first value since we don't need that.
 	  values.shift();
 	  var mantissa = 0;
-	  var _iterator = _createForOfIteratorHelper(values),
-	    _step;
-	  try {
-	    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-	      var value = _step.value;
-	      if (value !== undefined) {
-	        mantissa += new Function("return ".concat(value))();
-	      }
+	  for (var value of values) {
+	    if (value !== undefined) {
+	      mantissa += new Function(`return ${value}`)();
 	    }
-	  } catch (err) {
-	    _iterator.e(err);
-	  } finally {
-	    _iterator.f();
 	  }
 	  return mantissa;
 	}
 	function decomposeQuantity(quantity) {
 	  var mantissaMatch = quantity.match(/^(\d+(?:\/\d+)?)(?: (\d+(?:\/\d+)?))?/);
 	  var unitMatch = quantity.match(/[a-zA-Z]+$/);
-	  var mantissa = processMantissa(_toConsumableArray(mantissaMatch));
+	  if (!mantissaMatch) {
+	    return null;
+	  }
+	  var mantissa = processMantissa([...mantissaMatch]);
 	  return {
-	    mantissa: mantissa,
+	    mantissa,
 	    unit: unitMatch && unitMatch[0]
 	  };
 	}
 	function diffQuantities(quantity, previousQuantity) {
 	  var quantityDecomposed = decomposeQuantity(quantity);
 	  var previousQuantityDecomposed = decomposeQuantity(previousQuantity);
+	  if (!quantityDecomposed || !previousQuantityDecomposed) {
+	    return 'same';
+	  }
 	  if (!quantityDecomposed.unit) {
 	    return getStatus(quantityDecomposed.mantissa, previousQuantityDecomposed.mantissa);
-	  } else {
-	    // Normalize unit
-	    return getStatus(mantissaAfterUnitNormalization(quantityDecomposed), mantissaAfterUnitNormalization(previousQuantityDecomposed));
 	  }
+	  return getStatus(mantissaAfterUnitNormalization(quantityDecomposed), mantissaAfterUnitNormalization(previousQuantityDecomposed));
 	}
 
-	var RecipeList = /*#__PURE__*/function () {
-	  function RecipeList() {
-	    _classCallCheck(this, RecipeList);
-	    _defineProperty(this, "data", {});
-	    _defineProperty(this, "initDone", false);
+	class RecipeList {
+	  data = {};
+	  initDone = false;
+	  async init() {
+	    if (!this.initDone) {
+	      this.initDone = true;
+	      await this.refresh();
+	    }
 	  }
-	  _createClass(RecipeList, [{
-	    key: "init",
-	    value: function () {
-	      var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-	        return _regeneratorRuntime().wrap(function _callee$(_context) {
-	          while (1) switch (_context.prev = _context.next) {
-	            case 0:
-	              if (this.initDone) {
-	                _context.next = 4;
-	                break;
-	              }
-	              this.initDone = true;
-	              _context.next = 4;
-	              return this.refresh();
-	            case 4:
-	            case "end":
-	              return _context.stop();
-	          }
-	        }, _callee, this);
-	      }));
-	      function init() {
-	        return _init.apply(this, arguments);
-	      }
-	      return init;
-	    }()
-	  }, {
-	    key: "refresh",
-	    value: function () {
-	      var _refresh = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-	        var results, _iterator, _step, result;
-	        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-	          while (1) switch (_context2.prev = _context2.next) {
-	            case 0:
-	              _context2.next = 2;
-	              return getRequest('/recipes');
-	            case 2:
-	              results = _context2.sent;
-	              _iterator = _createForOfIteratorHelper(results);
-	              try {
-	                for (_iterator.s(); !(_step = _iterator.n()).done;) {
-	                  result = _step.value;
-	                  result.extended = false;
-	                  this.data[result.id] = result;
-	                }
-	              } catch (err) {
-	                _iterator.e(err);
-	              } finally {
-	                _iterator.f();
-	              }
-	            case 5:
-	            case "end":
-	              return _context2.stop();
-	          }
-	        }, _callee2, this);
-	      }));
-	      function refresh() {
-	        return _refresh.apply(this, arguments);
-	      }
-	      return refresh;
-	    }()
-	  }, {
-	    key: "addRecipe",
-	    value: function () {
-	      var _addRecipe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(data) {
-	        var _yield$postRequest, id;
-	        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-	          while (1) switch (_context3.prev = _context3.next) {
-	            case 0:
-	              _context3.next = 2;
-	              return this.init();
-	            case 2:
-	              _context3.next = 4;
-	              return postRequest("/recipes", data);
-	            case 4:
-	              _yield$postRequest = _context3.sent;
-	              id = _yield$postRequest.id;
-	              _context3.next = 8;
-	              return this._getRecipe(id, true);
-	            case 8:
-	            case "end":
-	              return _context3.stop();
-	          }
-	        }, _callee3, this);
-	      }));
-	      function addRecipe(_x) {
-	        return _addRecipe.apply(this, arguments);
-	      }
-	      return addRecipe;
-	    }()
-	  }, {
-	    key: "cloneRecipe",
-	    value: function () {
-	      var _cloneRecipe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(key) {
-	        var _yield$getRequest, id;
-	        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-	          while (1) switch (_context4.prev = _context4.next) {
-	            case 0:
-	              _context4.next = 2;
-	              return this.init();
-	            case 2:
-	              _context4.next = 4;
-	              return getRequest("/recipes/".concat(key, "/copy"));
-	            case 4:
-	              _yield$getRequest = _context4.sent;
-	              id = _yield$getRequest.id;
-	              _context4.next = 8;
-	              return this._getRecipe(id);
-	            case 8:
-	              _context4.next = 10;
-	              return this._useCategoryAndIngredients(key);
-	            case 10:
-	              return _context4.abrupt("return", id);
-	            case 11:
-	            case "end":
-	              return _context4.stop();
-	          }
-	        }, _callee4, this);
-	      }));
-	      function cloneRecipe(_x2) {
-	        return _cloneRecipe.apply(this, arguments);
-	      }
-	      return cloneRecipe;
-	    }()
-	  }, {
-	    key: "getRecipe",
-	    value: function () {
-	      var _getRecipe2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(key) {
-	        var record, recordProcessed;
-	        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-	          while (1) switch (_context5.prev = _context5.next) {
-	            case 0:
-	              _context5.next = 2;
-	              return this.init();
-	            case 2:
-	              record = this.data[key];
-	              recordProcessed = deepClone(record); // Process data
-	              recordProcessed.dateCreated = new Date(record.dateCreated);
+	  async refresh() {
+	    const results = await getRequest('/recipes');
+	    for (var result of results) {
+	      result.extended = false;
+	      this.data[result.id] = result;
+	    }
+	  }
+	  async addRecipe(data) {
+	    await this.init();
+	    const {
+	      id
+	    } = await postRequest(`/recipes`, data);
+	    await this._getRecipe(id, true);
 
-	              // Process category
-	              _context5.next = 7;
-	              return categorySet.get(record.category);
-	            case 7:
-	              recordProcessed.category = _context5.sent.name;
-	              return _context5.abrupt("return", recordProcessed);
-	            case 9:
-	            case "end":
-	              return _context5.stop();
-	          }
-	        }, _callee5, this);
-	      }));
-	      function getRecipe(_x3) {
-	        return _getRecipe2.apply(this, arguments);
+	    // After adding a new recipe, we might have new ingredients and categories.
+	    // Likewise, we need to refresh both the item sets in order to have the
+	    // fresh data with us.
+	    await categorySet.refresh();
+	    await ingredientSet.refresh();
+	  }
+	  async cloneRecipe(key) {
+	    await this.init();
+	    const {
+	      id
+	    } = await getRequest(`/recipes/${key}/copy`);
+	    await this._getRecipe(id);
+
+	    // 'Use' the ingredients and the category.
+	    await this._useCategoryAndIngredients(key);
+	    return id;
+	  }
+	  async getRecipe(key) {
+	    await this.init();
+	    var record = this.data[key];
+	    var recordProcessed = deepClone(record);
+
+	    // Process data
+	    recordProcessed.dateCreated = new Date(record.dateCreated);
+
+	    // Process category
+	    recordProcessed.category = (await categorySet.get(record.category)).name;
+	    return recordProcessed;
+	  }
+	  async _getRecipe(key, force) {
+	    await this.init();
+	    if (!this.data[key] || this.data[key].extended === false || force) {
+	      const record = await getRequest(`/recipes/${key}`);
+	      this.data[key] = record;
+	      this.data[key].extended = true;
+	    }
+	    return this.data[key];
+	  }
+	  async getAllRecipes() {
+	    await this.init();
+	    var records = [];
+	    for (var key in this.data) {
+	      var record = await this.getRecipe(key);
+	      if (record.extended === false || record.next === null) {
+	        records.push(record);
 	      }
-	      return getRecipe;
-	    }()
-	  }, {
-	    key: "_getRecipe",
-	    value: function () {
-	      var _getRecipe3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(key, force) {
-	        var record;
-	        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-	          while (1) switch (_context6.prev = _context6.next) {
-	            case 0:
-	              _context6.next = 2;
-	              return this.init();
-	            case 2:
-	              if (!(!this.data[key] || this.data[key].extended === false || force)) {
-	                _context6.next = 8;
-	                break;
-	              }
-	              _context6.next = 5;
-	              return getRequest("/recipes/".concat(key));
-	            case 5:
-	              record = _context6.sent;
-	              this.data[key] = record;
-	              this.data[key].extended = true;
-	            case 8:
-	              return _context6.abrupt("return", this.data[key]);
-	            case 9:
-	            case "end":
-	              return _context6.stop();
-	          }
-	        }, _callee6, this);
-	      }));
-	      function _getRecipe(_x4, _x5) {
-	        return _getRecipe3.apply(this, arguments);
+	    }
+	    return records;
+	  }
+	  async compareIngredient(key, itemIndex, ingredientKey) {
+	    await this.init();
+	    var record = this.data[key];
+	    if (record.previous) {
+	      var previousRecord = await this._getRecipe(record.previous);
+	      var ingredients = record.items[itemIndex].ingredients;
+	      var previousIngredients = previousRecord.items[itemIndex].ingredients;
+
+	      // First, determine if the current ingredient is 'new'.
+	      if (!previousIngredients.includes(ingredientKey)) {
+	        return 'new';
+	      } else {
+	        // Given that the current ingredient is not 'new', further check if
+	        // it has increased or decreased in quantity.
+
+	        var quantity = record.items[itemIndex].quantities[ingredients.indexOf(ingredientKey)];
+	        var previousQuantity = previousRecord.items[itemIndex].quantities[previousIngredients.indexOf(ingredientKey)];
+	        return diffQuantities(quantity, previousQuantity);
 	      }
-	      return _getRecipe;
-	    }()
-	  }, {
-	    key: "getAllRecipes",
-	    value: function () {
-	      var _getAllRecipes = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-	        var records, key, record;
-	        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-	          while (1) switch (_context7.prev = _context7.next) {
-	            case 0:
-	              _context7.next = 2;
-	              return this.init();
-	            case 2:
-	              records = [];
-	              _context7.t0 = _regeneratorRuntime().keys(this.data);
-	            case 4:
-	              if ((_context7.t1 = _context7.t0()).done) {
-	                _context7.next = 12;
-	                break;
-	              }
-	              key = _context7.t1.value;
-	              _context7.next = 8;
-	              return this.getRecipe(key);
-	            case 8:
-	              record = _context7.sent;
-	              if (record.extended === false || record.next === null) {
-	                records.push(record);
-	              }
-	              _context7.next = 4;
-	              break;
-	            case 12:
-	              return _context7.abrupt("return", records);
-	            case 13:
-	            case "end":
-	              return _context7.stop();
-	          }
-	        }, _callee7, this);
-	      }));
-	      function getAllRecipes() {
-	        return _getAllRecipes.apply(this, arguments);
+	    } else {
+	      return 'same';
+	    }
+	  }
+	  async getRecipeDetailed(key) {
+	    await this.init();
+	    console.log('getting detailed recipe');
+	    await this._getRecipe(key);
+	    var recordProcessed = await this.getRecipe(key);
+
+	    // Process ingredients
+	    try {
+	      var itemIndex = 0;
+	      for (var item of recordProcessed.items) {
+	        var ingredients = item.ingredients;
+	        for (var i = 0, len = ingredients.length; i < len; i++) {
+	          ingredients[i] = {
+	            name: (await ingredientSet.get(ingredients[i])).name,
+	            status: await this.compareIngredient(key, itemIndex, ingredients[i])
+	          };
+	        }
+	        itemIndex++;
 	      }
-	      return getAllRecipes;
-	    }()
-	  }, {
-	    key: "compareIngredient",
-	    value: function () {
-	      var _compareIngredient = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(key, itemIndex, ingredientKey) {
-	        var record, previousRecord, ingredients, previousIngredients, quantity, previousQuantity;
-	        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-	          while (1) switch (_context8.prev = _context8.next) {
-	            case 0:
-	              _context8.next = 2;
-	              return this.init();
-	            case 2:
-	              record = this.data[key];
-	              if (!record.previous) {
-	                _context8.next = 18;
-	                break;
-	              }
-	              _context8.next = 6;
-	              return this._getRecipe(record.previous);
-	            case 6:
-	              previousRecord = _context8.sent;
-	              ingredients = record.items[itemIndex].ingredients;
-	              previousIngredients = previousRecord.items[itemIndex].ingredients; // First, determine if the current ingredient is 'new'.
-	              if (previousIngredients.includes(ingredientKey)) {
-	                _context8.next = 13;
-	                break;
-	              }
-	              return _context8.abrupt("return", 'new');
-	            case 13:
-	              // Given that the current ingredient is not 'new', further check if
-	              // it has increased or decreased in quantity.
-	              quantity = record.items[itemIndex].quantities[ingredients.indexOf(ingredientKey)];
-	              previousQuantity = previousRecord.items[itemIndex].quantities[previousIngredients.indexOf(ingredientKey)];
-	              return _context8.abrupt("return", diffQuantities(quantity, previousQuantity));
-	            case 16:
-	              _context8.next = 19;
-	              break;
-	            case 18:
-	              return _context8.abrupt("return", 'same');
-	            case 19:
-	            case "end":
-	              return _context8.stop();
-	          }
-	        }, _callee8, this);
-	      }));
-	      function compareIngredient(_x6, _x7, _x8) {
-	        return _compareIngredient.apply(this, arguments);
+	      recordProcessed.iterations = await this.getIterationDetails(key);
+	    } catch (e) {
+	      console.log('error occurred', e);
+	    }
+	    return recordProcessed;
+	  }
+	  async getRecipeForUpdate(key) {
+	    await this.init();
+	    var record = deepClone(await this._getRecipe(key));
+
+	    // Process category
+	    record.category = await categorySet.getForUpdate(record.category);
+
+	    // Process ingredients
+	    for (var item of record.items) {
+	      var ingredients = item.ingredients;
+	      for (var i = 0, len = ingredients.length; i < len; i++) {
+	        ingredients[i] = await ingredientSet.getForUpdate(ingredients[i]);
 	      }
-	      return compareIngredient;
-	    }()
-	  }, {
-	    key: "getRecipeDetailed",
-	    value: function () {
-	      var _getRecipeDetailed = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(key) {
-	        var recordProcessed, itemIndex, _iterator2, _step2, item, ingredients, i, len;
-	        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-	          while (1) switch (_context9.prev = _context9.next) {
-	            case 0:
-	              _context9.next = 2;
-	              return this.init();
-	            case 2:
-	              _context9.next = 4;
-	              return this._getRecipe(key);
-	            case 4:
-	              _context9.next = 6;
-	              return this.getRecipe(key);
-	            case 6:
-	              recordProcessed = _context9.sent;
-	              // Process ingredients
-	              itemIndex = 0;
-	              _iterator2 = _createForOfIteratorHelper(recordProcessed.items);
-	              _context9.prev = 9;
-	              _iterator2.s();
-	            case 11:
-	              if ((_step2 = _iterator2.n()).done) {
-	                _context9.next = 29;
-	                break;
-	              }
-	              item = _step2.value;
-	              ingredients = item.ingredients;
-	              i = 0, len = ingredients.length;
-	            case 15:
-	              if (!(i < len)) {
-	                _context9.next = 26;
-	                break;
-	              }
-	              _context9.next = 18;
-	              return ingredientSet.get(ingredients[i]);
-	            case 18:
-	              _context9.t0 = _context9.sent.name;
-	              _context9.next = 21;
-	              return this.compareIngredient(key, itemIndex, ingredients[i]);
-	            case 21:
-	              _context9.t1 = _context9.sent;
-	              ingredients[i] = {
-	                name: _context9.t0,
-	                status: _context9.t1
-	              };
-	            case 23:
-	              i++;
-	              _context9.next = 15;
-	              break;
-	            case 26:
-	              itemIndex++;
-	            case 27:
-	              _context9.next = 11;
-	              break;
-	            case 29:
-	              _context9.next = 34;
-	              break;
-	            case 31:
-	              _context9.prev = 31;
-	              _context9.t2 = _context9["catch"](9);
-	              _iterator2.e(_context9.t2);
-	            case 34:
-	              _context9.prev = 34;
-	              _iterator2.f();
-	              return _context9.finish(34);
-	            case 37:
-	              _context9.next = 39;
-	              return this.getIterationDetails(key);
-	            case 39:
-	              recordProcessed.iterations = _context9.sent;
-	              return _context9.abrupt("return", recordProcessed);
-	            case 41:
-	            case "end":
-	              return _context9.stop();
-	          }
-	        }, _callee9, this, [[9, 31, 34, 37]]);
-	      }));
-	      function getRecipeDetailed(_x9) {
-	        return _getRecipeDetailed.apply(this, arguments);
+	    }
+	    return record;
+	  }
+	  async deleteRecipe(key) {
+	    await this.init();
+	    await deleteRequest(`/recipes/${key}`);
+
+	    // Below, we could re-fetch data from the API and just use it to populate
+	    // the category and ingredient sets with the updated usages, but that's
+	    // totally unnecessary — it would waste bandwidth. We could replicate the
+	    // entire logic on the client, which is done below.
+	    // 
+	    // It's really simple :)
+
+	    await this._unUseCategoryAndIngredients(key);
+	    var record = this.data[key];
+
+	    // Restructure the iteration pointers.
+	    if (record.previous) {
+	      await this._updateRecipeRecord(record.previous, {
+	        next: record.next
+	      });
+	    }
+	    if (record.next) {
+	      await this._updateRecipeRecord(record.next, {
+	        previous: record.previous
+	      });
+	    }
+	    delete this.data[key];
+	  }
+	  async _forEachIngredient(key, callback) {
+	    await this.init();
+	    var record = this.data[key];
+	    for (var item of record.items) {
+	      for (var ingredient of item.ingredients) {
+	        await callback(ingredient);
 	      }
-	      return getRecipeDetailed;
-	    }()
-	  }, {
-	    key: "getRecipeForUpdate",
-	    value: function () {
-	      var _getRecipeForUpdate = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(key) {
-	        var record, _iterator3, _step3, item, ingredients, i, len;
-	        return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-	          while (1) switch (_context10.prev = _context10.next) {
-	            case 0:
-	              _context10.next = 2;
-	              return this.init();
-	            case 2:
-	              _context10.t0 = deepClone;
-	              _context10.next = 5;
-	              return this._getRecipe(key);
-	            case 5:
-	              _context10.t1 = _context10.sent;
-	              record = (0, _context10.t0)(_context10.t1);
-	              _context10.next = 9;
-	              return categorySet.getForUpdate(record.category);
-	            case 9:
-	              record.category = _context10.sent;
-	              // Process ingredients
-	              _iterator3 = _createForOfIteratorHelper(record.items);
-	              _context10.prev = 11;
-	              _iterator3.s();
-	            case 13:
-	              if ((_step3 = _iterator3.n()).done) {
-	                _context10.next = 26;
-	                break;
-	              }
-	              item = _step3.value;
-	              ingredients = item.ingredients;
-	              i = 0, len = ingredients.length;
-	            case 17:
-	              if (!(i < len)) {
-	                _context10.next = 24;
-	                break;
-	              }
-	              _context10.next = 20;
-	              return ingredientSet.getForUpdate(ingredients[i]);
-	            case 20:
-	              ingredients[i] = _context10.sent;
-	            case 21:
-	              i++;
-	              _context10.next = 17;
-	              break;
-	            case 24:
-	              _context10.next = 13;
-	              break;
-	            case 26:
-	              _context10.next = 31;
-	              break;
-	            case 28:
-	              _context10.prev = 28;
-	              _context10.t2 = _context10["catch"](11);
-	              _iterator3.e(_context10.t2);
-	            case 31:
-	              _context10.prev = 31;
-	              _iterator3.f();
-	              return _context10.finish(31);
-	            case 34:
-	              return _context10.abrupt("return", record);
-	            case 35:
-	            case "end":
-	              return _context10.stop();
-	          }
-	        }, _callee10, this, [[11, 28, 31, 34]]);
-	      }));
-	      function getRecipeForUpdate(_x10) {
-	        return _getRecipeForUpdate.apply(this, arguments);
+	    }
+	  }
+	  async _useCategoryAndIngredients(key) {
+	    await this.init();
+	    var record = this.data[key];
+
+	    // use() the category.
+	    await categorySet.use(record.category);
+
+	    // Go over all ingredients and use() each one.
+	    await this._forEachIngredient(key, async ingredientKey => {
+	      await ingredientSet.use(ingredientKey);
+	    });
+	  }
+	  async _unUseCategoryAndIngredients(key) {
+	    await this.init();
+	    var record = this.data[key];
+
+	    // unUse() the category.
+	    await categorySet.unUse(record.category);
+
+	    // Go over all ingredients and unUse() each one.
+	    await this._forEachIngredient(key, async ingredientKey => {
+	      await ingredientSet.unUse(ingredientKey);
+	    });
+	  }
+	  async makeIteration(key) {
+	    await this.init();
+	    const result = await getRequest(`/recipes/${key}/iterate`);
+
+	    // Re-fetch the current record and the new record.
+	    await this._getRecipe(key, true);
+	    await this._getRecipe(result.id, true);
+
+	    // 'Use' the ingredients and the category.
+	    await this._useCategoryAndIngredients(key);
+	    return result.id;
+	  }
+	  async updateRecipe(key, data) {
+	    await this.init();
+	    await putRequest(`/recipes/${key}`, data);
+
+	    // When a recipe is updated, we need to re-fetch it from the API.
+	    // 
+	    // This is necessary because it might be that more ingredients are added to
+	    // the recipe or maybe even its category is changed, and only the backend
+	    // database knows of the keys it ultimately assigns to these 'new' things.
+	    // Hence, by re-fetching the record, we can be sure as to what exactly is
+	    // the new set of ingredients and categories.
+	    await this._getRecipe(key, true);
+
+	    // This also means that we need to refresh both the category and ingredient
+	    // sets, with fresh data from the API, so that they remain up-to-date.
+	    await categorySet.refresh();
+	    await ingredientSet.refresh();
+	  }
+	  async _updateRecipeRecord(key, record) {
+	    this.data[key] = Object.assign(this.data[key], record);
+	  }
+	  async getIterationDetails(key) {
+	    await this.init();
+	    var previous = this.data[key].previous;
+	    var next = this.data[key].next;
+	    if (previous || next) {
+	      var previousRecords = 1;
+	      while (previous !== null) {
+	        previousRecords++;
+	        previous = (await this._getRecipe(previous)).previous;
 	      }
-	      return getRecipeForUpdate;
-	    }()
-	  }, {
-	    key: "deleteRecipe",
-	    value: function () {
-	      var _deleteRecipe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(key) {
-	        var record;
-	        return _regeneratorRuntime().wrap(function _callee11$(_context11) {
-	          while (1) switch (_context11.prev = _context11.next) {
-	            case 0:
-	              _context11.next = 2;
-	              return this.init();
-	            case 2:
-	              _context11.next = 4;
-	              return deleteRequest("/recipes/".concat(key));
-	            case 4:
-	              _context11.next = 6;
-	              return this._unUseCategoryAndIngredients(key);
-	            case 6:
-	              record = this.data[key]; // Restructure the iteration pointers.
-	              if (!record.previous) {
-	                _context11.next = 10;
-	                break;
-	              }
-	              _context11.next = 10;
-	              return this._updateRecipeRecord(record.previous, {
-	                next: record.next
-	              });
-	            case 10:
-	              if (!record.next) {
-	                _context11.next = 13;
-	                break;
-	              }
-	              _context11.next = 13;
-	              return this._updateRecipeRecord(record.next, {
-	                previous: record.previous
-	              });
-	            case 13:
-	              delete this.data[key];
-	            case 14:
-	            case "end":
-	              return _context11.stop();
-	          }
-	        }, _callee11, this);
-	      }));
-	      function deleteRecipe(_x11) {
-	        return _deleteRecipe.apply(this, arguments);
+	      var nextRecords = 0;
+	      while (next !== null) {
+	        nextRecords++;
+	        next = (await this._getRecipe(next)).next;
 	      }
-	      return deleteRecipe;
-	    }()
-	  }, {
-	    key: "_forEachIngredient",
-	    value: function () {
-	      var _forEachIngredient2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12(key, callback) {
-	        var record, _iterator4, _step4, item, _iterator5, _step5, ingredient;
-	        return _regeneratorRuntime().wrap(function _callee12$(_context12) {
-	          while (1) switch (_context12.prev = _context12.next) {
-	            case 0:
-	              _context12.next = 2;
-	              return this.init();
-	            case 2:
-	              record = this.data[key];
-	              _iterator4 = _createForOfIteratorHelper(record.items);
-	              _context12.prev = 4;
-	              _iterator4.s();
-	            case 6:
-	              if ((_step4 = _iterator4.n()).done) {
-	                _context12.next = 27;
-	                break;
-	              }
-	              item = _step4.value;
-	              _iterator5 = _createForOfIteratorHelper(item.ingredients);
-	              _context12.prev = 9;
-	              _iterator5.s();
-	            case 11:
-	              if ((_step5 = _iterator5.n()).done) {
-	                _context12.next = 17;
-	                break;
-	              }
-	              ingredient = _step5.value;
-	              _context12.next = 15;
-	              return callback(ingredient);
-	            case 15:
-	              _context12.next = 11;
-	              break;
-	            case 17:
-	              _context12.next = 22;
-	              break;
-	            case 19:
-	              _context12.prev = 19;
-	              _context12.t0 = _context12["catch"](9);
-	              _iterator5.e(_context12.t0);
-	            case 22:
-	              _context12.prev = 22;
-	              _iterator5.f();
-	              return _context12.finish(22);
-	            case 25:
-	              _context12.next = 6;
-	              break;
-	            case 27:
-	              _context12.next = 32;
-	              break;
-	            case 29:
-	              _context12.prev = 29;
-	              _context12.t1 = _context12["catch"](4);
-	              _iterator4.e(_context12.t1);
-	            case 32:
-	              _context12.prev = 32;
-	              _iterator4.f();
-	              return _context12.finish(32);
-	            case 35:
-	            case "end":
-	              return _context12.stop();
-	          }
-	        }, _callee12, this, [[4, 29, 32, 35], [9, 19, 22, 25]]);
-	      }));
-	      function _forEachIngredient(_x12, _x13) {
-	        return _forEachIngredient2.apply(this, arguments);
+	      return {
+	        current: previousRecords,
+	        total: previousRecords + nextRecords,
+	        next: this.data[key].next,
+	        previous: this.data[key].previous
+	      };
+	    }
+	    return null;
+	  }
+	  async searchRecipe(query) {
+	    await this.init();
+	    var results = [];
+	    for (var key in this.data) {
+	      var record = this.data[key];
+	      if (record.name.toLowerCase().includes(query.toLowerCase())) {
+	        results.push(await this.getRecipe(key));
 	      }
-	      return _forEachIngredient;
-	    }()
-	  }, {
-	    key: "_useCategoryAndIngredients",
-	    value: function () {
-	      var _useCategoryAndIngredients2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee14(key) {
-	        var record;
-	        return _regeneratorRuntime().wrap(function _callee14$(_context14) {
-	          while (1) switch (_context14.prev = _context14.next) {
-	            case 0:
-	              _context14.next = 2;
-	              return this.init();
-	            case 2:
-	              record = this.data[key]; // use() the category.
-	              _context14.next = 5;
-	              return categorySet.use(record.category);
-	            case 5:
-	              _context14.next = 7;
-	              return this._forEachIngredient(key, /*#__PURE__*/function () {
-	                var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13(ingredientKey) {
-	                  return _regeneratorRuntime().wrap(function _callee13$(_context13) {
-	                    while (1) switch (_context13.prev = _context13.next) {
-	                      case 0:
-	                        _context13.next = 2;
-	                        return ingredientSet.use(ingredientKey);
-	                      case 2:
-	                      case "end":
-	                        return _context13.stop();
-	                    }
-	                  }, _callee13);
-	                }));
-	                return function (_x15) {
-	                  return _ref.apply(this, arguments);
-	                };
-	              }());
-	            case 7:
-	            case "end":
-	              return _context14.stop();
+	    }
+	    return results;
+	  }
+	  async download() {
+	    await this.init();
+	    const backup = await getRequest('/');
+	    const anchorElement = document.createElement('a');
+	    anchorElement.download = 'recipes-app.json';
+	    const blob = new Blob([JSON.stringify(backup)], {
+	      type: 'applicaton/json'
+	    });
+	    const url = URL.createObjectURL(blob);
+	    anchorElement.href = url;
+	    anchorElement.click();
+	  }
+	  async normalizeJSON(jsonString) {
+	    const obj = JSON.parse(jsonString);
+	    if (!obj.name) {
+	      return jsonString;
+	    } else {
+	      const restoringObj = {
+	        categories: [],
+	        ingredients: [],
+	        recipes: []
+	      };
+	      const stores = obj.stores;
+	      for (var store of stores) {
+	        if (store.name === 'categories' || store.name === 'ingredients') {
+	          for (var record of store.records) {
+	            restoringObj[store.name].push({
+	              id: record[0],
+	              name: record[1].name
+	            });
 	          }
-	        }, _callee14, this);
-	      }));
-	      function _useCategoryAndIngredients(_x14) {
-	        return _useCategoryAndIngredients2.apply(this, arguments);
-	      }
-	      return _useCategoryAndIngredients;
-	    }()
-	  }, {
-	    key: "_unUseCategoryAndIngredients",
-	    value: function () {
-	      var _unUseCategoryAndIngredients2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee16(key) {
-	        var record;
-	        return _regeneratorRuntime().wrap(function _callee16$(_context16) {
-	          while (1) switch (_context16.prev = _context16.next) {
-	            case 0:
-	              _context16.next = 2;
-	              return this.init();
-	            case 2:
-	              record = this.data[key]; // unUse() the category.
-	              _context16.next = 5;
-	              return categorySet.unUse(record.category);
-	            case 5:
-	              _context16.next = 7;
-	              return this._forEachIngredient(key, /*#__PURE__*/function () {
-	                var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee15(ingredientKey) {
-	                  return _regeneratorRuntime().wrap(function _callee15$(_context15) {
-	                    while (1) switch (_context15.prev = _context15.next) {
-	                      case 0:
-	                        _context15.next = 2;
-	                        return ingredientSet.unUse(ingredientKey);
-	                      case 2:
-	                      case "end":
-	                        return _context15.stop();
-	                    }
-	                  }, _callee15);
-	                }));
-	                return function (_x17) {
-	                  return _ref2.apply(this, arguments);
-	                };
-	              }());
-	            case 7:
-	            case "end":
-	              return _context16.stop();
+	        } else {
+	          // We are in the 'recipes' store.
+
+	          var i = 0;
+	          var keyToIntegerMap = {};
+
+	          // First we need to go over all the recipes and normalize the
+	          // awkward string ids (representing timestamps) to integer ids.
+	          for (var record of store.records) {
+	            keyToIntegerMap[record[0]] = ++i;
 	          }
-	        }, _callee16, this);
-	      }));
-	      function _unUseCategoryAndIngredients(_x16) {
-	        return _unUseCategoryAndIngredients2.apply(this, arguments);
-	      }
-	      return _unUseCategoryAndIngredients;
-	    }()
-	  }, {
-	    key: "makeIteration",
-	    value: function () {
-	      var _makeIteration = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee17(key) {
-	        var result;
-	        return _regeneratorRuntime().wrap(function _callee17$(_context17) {
-	          while (1) switch (_context17.prev = _context17.next) {
-	            case 0:
-	              _context17.next = 2;
-	              return this.init();
-	            case 2:
-	              _context17.next = 4;
-	              return getRequest("/recipes/".concat(key, "/iterate"));
-	            case 4:
-	              result = _context17.sent;
-	              _context17.next = 7;
-	              return this._getRecipe(key, true);
-	            case 7:
-	              _context17.next = 9;
-	              return this._getRecipe(result.id, true);
-	            case 9:
-	              _context17.next = 11;
-	              return this._useCategoryAndIngredients(key);
-	            case 11:
-	              return _context17.abrupt("return", result.id);
-	            case 12:
-	            case "end":
-	              return _context17.stop();
+	          for (var record of store.records) {
+	            var recipeRecord = record[1];
+	            recipeRecord.id = keyToIntegerMap[record[0]];
+	            if (recipeRecord.previous) {
+	              recipeRecord.previous = keyToIntegerMap[recipeRecord.previous];
+	            }
+	            if (recipeRecord.next) {
+	              recipeRecord.next = keyToIntegerMap[recipeRecord.next];
+	            }
+	            restoringObj.recipes.push(recipeRecord);
 	          }
-	        }, _callee17, this);
-	      }));
-	      function makeIteration(_x18) {
-	        return _makeIteration.apply(this, arguments);
+	        }
 	      }
-	      return makeIteration;
-	    }()
-	  }, {
-	    key: "updateRecipe",
-	    value: function () {
-	      var _updateRecipe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee18(key, data) {
-	        return _regeneratorRuntime().wrap(function _callee18$(_context18) {
-	          while (1) switch (_context18.prev = _context18.next) {
-	            case 0:
-	              _context18.next = 2;
-	              return this.init();
-	            case 2:
-	              _context18.next = 4;
-	              return putRequest("/recipes/".concat(key), data);
-	            case 4:
-	              _context18.next = 6;
-	              return this._getRecipe(key, true);
-	            case 6:
-	              _context18.next = 8;
-	              return categorySet.refresh();
-	            case 8:
-	              _context18.next = 10;
-	              return ingredientSet.refresh();
-	            case 10:
-	            case "end":
-	              return _context18.stop();
-	          }
-	        }, _callee18, this);
-	      }));
-	      function updateRecipe(_x19, _x20) {
-	        return _updateRecipe.apply(this, arguments);
-	      }
-	      return updateRecipe;
-	    }()
-	  }, {
-	    key: "_updateRecipeRecord",
-	    value: function () {
-	      var _updateRecipeRecord2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee19(key, record) {
-	        return _regeneratorRuntime().wrap(function _callee19$(_context19) {
-	          while (1) switch (_context19.prev = _context19.next) {
-	            case 0:
-	              this.data[key] = Object.assign(this.data[key], record);
-	            case 1:
-	            case "end":
-	              return _context19.stop();
-	          }
-	        }, _callee19, this);
-	      }));
-	      function _updateRecipeRecord(_x21, _x22) {
-	        return _updateRecipeRecord2.apply(this, arguments);
-	      }
-	      return _updateRecipeRecord;
-	    }()
-	  }, {
-	    key: "getIterationDetails",
-	    value: function () {
-	      var _getIterationDetails = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee20(key) {
-	        var previous, next, previousRecords, nextRecords;
-	        return _regeneratorRuntime().wrap(function _callee20$(_context20) {
-	          while (1) switch (_context20.prev = _context20.next) {
-	            case 0:
-	              _context20.next = 2;
-	              return this.init();
-	            case 2:
-	              previous = this.data[key].previous;
-	              next = this.data[key].next;
-	              if (!(previous || next)) {
-	                _context20.next = 22;
-	                break;
-	              }
-	              previousRecords = 1;
-	            case 6:
-	              if (!(previous !== null)) {
-	                _context20.next = 13;
-	                break;
-	              }
-	              previousRecords++;
-	              _context20.next = 10;
-	              return this._getRecipe(previous);
-	            case 10:
-	              previous = _context20.sent.previous;
-	              _context20.next = 6;
-	              break;
-	            case 13:
-	              nextRecords = 0;
-	            case 14:
-	              if (!(next !== null)) {
-	                _context20.next = 21;
-	                break;
-	              }
-	              nextRecords++;
-	              _context20.next = 18;
-	              return this._getRecipe(next);
-	            case 18:
-	              next = _context20.sent.next;
-	              _context20.next = 14;
-	              break;
-	            case 21:
-	              return _context20.abrupt("return", {
-	                current: previousRecords,
-	                total: previousRecords + nextRecords,
-	                next: this.data[key].next,
-	                previous: this.data[key].previous
-	              });
-	            case 22:
-	              return _context20.abrupt("return", null);
-	            case 23:
-	            case "end":
-	              return _context20.stop();
-	          }
-	        }, _callee20, this);
-	      }));
-	      function getIterationDetails(_x23) {
-	        return _getIterationDetails.apply(this, arguments);
-	      }
-	      return getIterationDetails;
-	    }()
-	  }, {
-	    key: "searchRecipe",
-	    value: function () {
-	      var _searchRecipe = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee21(query) {
-	        var results, key, record;
-	        return _regeneratorRuntime().wrap(function _callee21$(_context21) {
-	          while (1) switch (_context21.prev = _context21.next) {
-	            case 0:
-	              _context21.next = 2;
-	              return this.init();
-	            case 2:
-	              results = [];
-	              _context21.t0 = _regeneratorRuntime().keys(this.data);
-	            case 4:
-	              if ((_context21.t1 = _context21.t0()).done) {
-	                _context21.next = 15;
-	                break;
-	              }
-	              key = _context21.t1.value;
-	              record = this.data[key];
-	              if (!record.name.toLowerCase().includes(query.toLowerCase())) {
-	                _context21.next = 13;
-	                break;
-	              }
-	              _context21.t2 = results;
-	              _context21.next = 11;
-	              return this.getRecipe(key);
-	            case 11:
-	              _context21.t3 = _context21.sent;
-	              _context21.t2.push.call(_context21.t2, _context21.t3);
-	            case 13:
-	              _context21.next = 4;
-	              break;
-	            case 15:
-	              return _context21.abrupt("return", results);
-	            case 16:
-	            case "end":
-	              return _context21.stop();
-	          }
-	        }, _callee21, this);
-	      }));
-	      function searchRecipe(_x24) {
-	        return _searchRecipe.apply(this, arguments);
-	      }
-	      return searchRecipe;
-	    }()
-	  }, {
-	    key: "download",
-	    value: function () {
-	      var _download = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee22() {
-	        var backup, anchorElement, blob, url;
-	        return _regeneratorRuntime().wrap(function _callee22$(_context22) {
-	          while (1) switch (_context22.prev = _context22.next) {
-	            case 0:
-	              _context22.next = 2;
-	              return this.init();
-	            case 2:
-	              _context22.next = 4;
-	              return getRequest('/');
-	            case 4:
-	              backup = _context22.sent;
-	              anchorElement = document.createElement('a');
-	              anchorElement.download = 'recipes-app.json';
-	              blob = new Blob([JSON.stringify(backup)], {
-	                type: 'applicaton/json'
-	              });
-	              url = URL.createObjectURL(blob);
-	              anchorElement.href = url;
-	              anchorElement.click();
-	            case 11:
-	            case "end":
-	              return _context22.stop();
-	          }
-	        }, _callee22, this);
-	      }));
-	      function download() {
-	        return _download.apply(this, arguments);
-	      }
-	      return download;
-	    }()
-	  }, {
-	    key: "normalizeJSON",
-	    value: function () {
-	      var _normalizeJSON = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee23(jsonString) {
-	        var obj, restoringObj, stores, _iterator6, _step6, store, _iterator7, _step7, record, i, keyToIntegerMap, _iterator8, _step8, _iterator9, _step9, recipeRecord;
-	        return _regeneratorRuntime().wrap(function _callee23$(_context23) {
-	          while (1) switch (_context23.prev = _context23.next) {
-	            case 0:
-	              obj = JSON.parse(jsonString);
-	              if (obj.name) {
-	                _context23.next = 5;
-	                break;
-	              }
-	              return _context23.abrupt("return", jsonString);
-	            case 5:
-	              restoringObj = {
-	                categories: [],
-	                ingredients: [],
-	                recipes: []
-	              };
-	              stores = obj.stores;
-	              _iterator6 = _createForOfIteratorHelper(stores);
-	              try {
-	                for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-	                  store = _step6.value;
-	                  if (store.name === 'categories' || store.name === 'ingredients') {
-	                    _iterator7 = _createForOfIteratorHelper(store.records);
-	                    try {
-	                      for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-	                        record = _step7.value;
-	                        restoringObj[store.name].push({
-	                          id: record[0],
-	                          name: record[1].name
-	                        });
-	                      }
-	                    } catch (err) {
-	                      _iterator7.e(err);
-	                    } finally {
-	                      _iterator7.f();
-	                    }
-	                  } else {
-	                    // We are in the 'recipes' store.
-	                    i = 0;
-	                    keyToIntegerMap = {}; // First we need to go over all the recipes and normalize the
-	                    // awkward string ids (representing timestamps) to integer ids.
-	                    _iterator8 = _createForOfIteratorHelper(store.records);
-	                    try {
-	                      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-	                        record = _step8.value;
-	                        keyToIntegerMap[record[0]] = ++i;
-	                      }
-	                    } catch (err) {
-	                      _iterator8.e(err);
-	                    } finally {
-	                      _iterator8.f();
-	                    }
-	                    _iterator9 = _createForOfIteratorHelper(store.records);
-	                    try {
-	                      for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-	                        record = _step9.value;
-	                        recipeRecord = record[1];
-	                        recipeRecord.id = keyToIntegerMap[record[0]];
-	                        if (recipeRecord.previous) {
-	                          recipeRecord.previous = keyToIntegerMap[recipeRecord.previous];
-	                        }
-	                        if (recipeRecord.next) {
-	                          recipeRecord.next = keyToIntegerMap[recipeRecord.next];
-	                        }
-	                        restoringObj.recipes.push(recipeRecord);
-	                      }
-	                    } catch (err) {
-	                      _iterator9.e(err);
-	                    } finally {
-	                      _iterator9.f();
-	                    }
-	                  }
-	                }
-	              } catch (err) {
-	                _iterator6.e(err);
-	              } finally {
-	                _iterator6.f();
-	              }
-	              return _context23.abrupt("return", JSON.stringify(restoringObj));
-	            case 10:
-	            case "end":
-	              return _context23.stop();
-	          }
-	        }, _callee23);
-	      }));
-	      function normalizeJSON(_x25) {
-	        return _normalizeJSON.apply(this, arguments);
-	      }
-	      return normalizeJSON;
-	    }()
-	  }, {
-	    key: "restore",
-	    value: function () {
-	      var _restore = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee24(jsonString) {
-	        return _regeneratorRuntime().wrap(function _callee24$(_context24) {
-	          while (1) switch (_context24.prev = _context24.next) {
-	            case 0:
-	              _context24.next = 2;
-	              return this.init();
-	            case 2:
-	              _context24.t0 = postRequest;
-	              _context24.next = 5;
-	              return this.normalizeJSON(jsonString);
-	            case 5:
-	              _context24.t1 = _context24.sent;
-	              _context24.next = 8;
-	              return (0, _context24.t0)("/", _context24.t1);
-	            case 8:
-	              _context24.next = 10;
-	              return this.refresh();
-	            case 10:
-	              _context24.next = 12;
-	              return categorySet.refresh();
-	            case 12:
-	              _context24.next = 14;
-	              return ingredientSet.refresh();
-	            case 14:
-	            case "end":
-	              return _context24.stop();
-	          }
-	        }, _callee24, this);
-	      }));
-	      function restore(_x26) {
-	        return _restore.apply(this, arguments);
-	      }
-	      return restore;
-	    }()
-	  }, {
-	    key: "deleteAll",
-	    value: function () {
-	      var _deleteAll = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee25() {
-	        return _regeneratorRuntime().wrap(function _callee25$(_context25) {
-	          while (1) switch (_context25.prev = _context25.next) {
-	            case 0:
-	              _context25.next = 2;
-	              return this.init();
-	            case 2:
-	              _context25.next = 4;
-	              return deleteRequest("/recipes");
-	            case 4:
-	              this.data = {};
-	              _context25.next = 7;
-	              return ingredientSet.deleteAll();
-	            case 7:
-	              _context25.next = 9;
-	              return categorySet.deleteAll();
-	            case 9:
-	            case "end":
-	              return _context25.stop();
-	          }
-	        }, _callee25, this);
-	      }));
-	      function deleteAll() {
-	        return _deleteAll.apply(this, arguments);
-	      }
-	      return deleteAll;
-	    }()
-	  }]);
-	  return RecipeList;
-	}();
+	      return JSON.stringify(restoringObj);
+	    }
+	  }
+	  async restore(jsonString) {
+	    await this.init();
+	    await postRequest(`/`, await this.normalizeJSON(jsonString));
+	    await this.refresh();
+	    await categorySet.refresh();
+	    await ingredientSet.refresh();
+	  }
+	  async deleteAll() {
+	    await this.init();
+
+	    // Delete all recipes on the client and server.
+	    await deleteRequest(`/recipes`);
+	    this.data = {};
+	    await ingredientSet.deleteAll();
+	    await categorySet.deleteAll();
+	  }
+	}
 
 	var recipeList = new RecipeList();
 	var categorySet = new ItemSet('categories');

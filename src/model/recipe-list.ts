@@ -51,6 +51,12 @@ class RecipeList
 
       const { id } = await postRequest(`/recipes`, data);
       await this._getRecipe(id, true);
+
+      // After adding a new recipe, we might have new ingredients and categories.
+      // Likewise, we need to refresh both the item sets in order to have the
+      // fresh data with us.
+      await categorySet.refresh();
+      await ingredientSet.refresh();
    }
 
 
@@ -153,23 +159,29 @@ class RecipeList
    async getRecipeDetailed(key: string)
    {
       await this.init();
+      console.log('getting detailed recipe');
 
       await this._getRecipe(key);
       var recordProcessed: RecipeDetailed = await this.getRecipe(key) as any;
 
       // Process ingredients
-      var itemIndex = 0;
-      for (var item of recordProcessed.items) {
-         var ingredients = item.ingredients;
-         for (var i = 0, len = ingredients.length; i < len; i++) {
-            ingredients[i] = {
-               name: (await ingredientSet.get(ingredients[i] as any)).name,
-               status: await this.compareIngredient(key, itemIndex, ingredients[i] as any)
+      try {
+         var itemIndex = 0;
+         for (var item of recordProcessed.items) {
+            var ingredients = item.ingredients;
+            for (var i = 0, len = ingredients.length; i < len; i++) {
+               ingredients[i] = {
+                  name: (await ingredientSet.get(ingredients[i] as any)).name,
+                  status: await this.compareIngredient(key, itemIndex, ingredients[i] as any)
+               }
             }
+            itemIndex++;
          }
-         itemIndex++;
+         recordProcessed.iterations = await this.getIterationDetails(key);
       }
-      recordProcessed.iterations = await this.getIterationDetails(key);
+      catch (e) {
+         console.log('error occurred', e);
+      }
 
       return recordProcessed;
    }
