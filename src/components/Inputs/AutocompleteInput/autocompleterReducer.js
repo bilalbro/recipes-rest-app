@@ -27,13 +27,14 @@ export default function autocompleterReducer(state, action)
       case 'input':
          return {
             ...state,
+            entryClicked: false,
             value: action.value,
             hiddenValue: action.value
          };
 
       case 'inputBlur':
          const firstSuggestion = action.suggestions[0];
-         if (firstSuggestion) {
+         if (firstSuggestion && !state.entryClicked) {
             return {
                ...state,
                hiddenValue: state.getHiddenInputValue(firstSuggestion)
@@ -45,6 +46,7 @@ export default function autocompleterReducer(state, action)
          if (action.suggestion) {
             return {
                ...state,
+               entryClicked: true,
                value: state.getInputValue(action.suggestion),
                hiddenValue: state.getHiddenInputValue(action.suggestion)
             }

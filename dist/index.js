@@ -32670,7 +32670,7 @@
 	  };
 	  return _extends$1.apply(this, arguments);
 	}
-	function _objectWithoutPropertiesLoose$1(source, excluded) {
+	function _objectWithoutPropertiesLoose(source, excluded) {
 	  if (source == null) return {};
 	  var target = {};
 	  var sourceKeys = Object.keys(source);
@@ -32824,7 +32824,7 @@
 	    formData
 	  };
 	}
-	const _excluded$b = ["onClick", "relative", "reloadDocument", "replace", "state", "target", "to", "preventScrollReset"],
+	const _excluded = ["onClick", "relative", "reloadDocument", "replace", "state", "target", "to", "preventScrollReset"],
 	  _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"],
 	  _excluded3 = ["reloadDocument", "replace", "method", "action", "onSubmit", "fetcherKey", "routeId", "relative", "preventScrollReset"];
 	function createBrowserRouter(routes, opts) {
@@ -32889,7 +32889,7 @@
 	      to,
 	      preventScrollReset
 	    } = _ref4,
-	    rest = _objectWithoutPropertiesLoose$1(_ref4, _excluded$b);
+	    rest = _objectWithoutPropertiesLoose(_ref4, _excluded);
 	  let {
 	    basename
 	  } = reactExports.useContext(NavigationContext); // Rendered into <a href> for absolute URLs
@@ -32961,7 +32961,7 @@
 	      to,
 	      children
 	    } = _ref5,
-	    rest = _objectWithoutPropertiesLoose$1(_ref5, _excluded2);
+	    rest = _objectWithoutPropertiesLoose(_ref5, _excluded2);
 	  let path = useResolvedPath(to, {
 	    relative: rest.relative
 	  });
@@ -33040,7 +33040,7 @@
 	      relative,
 	      preventScrollReset
 	    } = _ref6,
-	    props = _objectWithoutPropertiesLoose$1(_ref6, _excluded3);
+	    props = _objectWithoutPropertiesLoose(_ref6, _excluded3);
 	  let submit = useSubmitImpl(fetcherKey, routeId);
 	  let formMethod = method.toLowerCase() === "get" ? "get" : "post";
 	  let formAction = useFormAction(action, {
@@ -33239,574 +33239,6 @@
 	  return createPath(path);
 	}
 
-	function _iterableToArrayLimit(arr, i) {
-	  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-	  if (null != _i) {
-	    var _s,
-	      _e,
-	      _x,
-	      _r,
-	      _arr = [],
-	      _n = !0,
-	      _d = !1;
-	    try {
-	      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-	        if (Object(_i) !== _i) return;
-	        _n = !1;
-	      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-	    } catch (err) {
-	      _d = !0, _e = err;
-	    } finally {
-	      try {
-	        if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return;
-	      } finally {
-	        if (_d) throw _e;
-	      }
-	    }
-	    return _arr;
-	  }
-	}
-	function ownKeys(object, enumerableOnly) {
-	  var keys = Object.keys(object);
-	  if (Object.getOwnPropertySymbols) {
-	    var symbols = Object.getOwnPropertySymbols(object);
-	    enumerableOnly && (symbols = symbols.filter(function (sym) {
-	      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-	    })), keys.push.apply(keys, symbols);
-	  }
-	  return keys;
-	}
-	function _objectSpread2(target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = null != arguments[i] ? arguments[i] : {};
-	    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-	      _defineProperty(target, key, source[key]);
-	    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-	      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-	    });
-	  }
-	  return target;
-	}
-	function _regeneratorRuntime() {
-	  _regeneratorRuntime = function () {
-	    return exports;
-	  };
-	  var exports = {},
-	    Op = Object.prototype,
-	    hasOwn = Op.hasOwnProperty,
-	    defineProperty = Object.defineProperty || function (obj, key, desc) {
-	      obj[key] = desc.value;
-	    },
-	    $Symbol = "function" == typeof Symbol ? Symbol : {},
-	    iteratorSymbol = $Symbol.iterator || "@@iterator",
-	    asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
-	    toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-	  function define(obj, key, value) {
-	    return Object.defineProperty(obj, key, {
-	      value: value,
-	      enumerable: !0,
-	      configurable: !0,
-	      writable: !0
-	    }), obj[key];
-	  }
-	  try {
-	    define({}, "");
-	  } catch (err) {
-	    define = function (obj, key, value) {
-	      return obj[key] = value;
-	    };
-	  }
-	  function wrap(innerFn, outerFn, self, tryLocsList) {
-	    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
-	      generator = Object.create(protoGenerator.prototype),
-	      context = new Context(tryLocsList || []);
-	    return defineProperty(generator, "_invoke", {
-	      value: makeInvokeMethod(innerFn, self, context)
-	    }), generator;
-	  }
-	  function tryCatch(fn, obj, arg) {
-	    try {
-	      return {
-	        type: "normal",
-	        arg: fn.call(obj, arg)
-	      };
-	    } catch (err) {
-	      return {
-	        type: "throw",
-	        arg: err
-	      };
-	    }
-	  }
-	  exports.wrap = wrap;
-	  var ContinueSentinel = {};
-	  function Generator() {}
-	  function GeneratorFunction() {}
-	  function GeneratorFunctionPrototype() {}
-	  var IteratorPrototype = {};
-	  define(IteratorPrototype, iteratorSymbol, function () {
-	    return this;
-	  });
-	  var getProto = Object.getPrototypeOf,
-	    NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-	  NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
-	  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
-	  function defineIteratorMethods(prototype) {
-	    ["next", "throw", "return"].forEach(function (method) {
-	      define(prototype, method, function (arg) {
-	        return this._invoke(method, arg);
-	      });
-	    });
-	  }
-	  function AsyncIterator(generator, PromiseImpl) {
-	    function invoke(method, arg, resolve, reject) {
-	      var record = tryCatch(generator[method], generator, arg);
-	      if ("throw" !== record.type) {
-	        var result = record.arg,
-	          value = result.value;
-	        return value && "object" == typeof value && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
-	          invoke("next", value, resolve, reject);
-	        }, function (err) {
-	          invoke("throw", err, resolve, reject);
-	        }) : PromiseImpl.resolve(value).then(function (unwrapped) {
-	          result.value = unwrapped, resolve(result);
-	        }, function (error) {
-	          return invoke("throw", error, resolve, reject);
-	        });
-	      }
-	      reject(record.arg);
-	    }
-	    var previousPromise;
-	    defineProperty(this, "_invoke", {
-	      value: function (method, arg) {
-	        function callInvokeWithMethodAndArg() {
-	          return new PromiseImpl(function (resolve, reject) {
-	            invoke(method, arg, resolve, reject);
-	          });
-	        }
-	        return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
-	      }
-	    });
-	  }
-	  function makeInvokeMethod(innerFn, self, context) {
-	    var state = "suspendedStart";
-	    return function (method, arg) {
-	      if ("executing" === state) throw new Error("Generator is already running");
-	      if ("completed" === state) {
-	        if ("throw" === method) throw arg;
-	        return doneResult();
-	      }
-	      for (context.method = method, context.arg = arg;;) {
-	        var delegate = context.delegate;
-	        if (delegate) {
-	          var delegateResult = maybeInvokeDelegate(delegate, context);
-	          if (delegateResult) {
-	            if (delegateResult === ContinueSentinel) continue;
-	            return delegateResult;
-	          }
-	        }
-	        if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
-	          if ("suspendedStart" === state) throw state = "completed", context.arg;
-	          context.dispatchException(context.arg);
-	        } else "return" === context.method && context.abrupt("return", context.arg);
-	        state = "executing";
-	        var record = tryCatch(innerFn, self, context);
-	        if ("normal" === record.type) {
-	          if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
-	          return {
-	            value: record.arg,
-	            done: context.done
-	          };
-	        }
-	        "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
-	      }
-	    };
-	  }
-	  function maybeInvokeDelegate(delegate, context) {
-	    var methodName = context.method,
-	      method = delegate.iterator[methodName];
-	    if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel;
-	    var record = tryCatch(method, delegate.iterator, context.arg);
-	    if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
-	    var info = record.arg;
-	    return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
-	  }
-	  function pushTryEntry(locs) {
-	    var entry = {
-	      tryLoc: locs[0]
-	    };
-	    1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
-	  }
-	  function resetTryEntry(entry) {
-	    var record = entry.completion || {};
-	    record.type = "normal", delete record.arg, entry.completion = record;
-	  }
-	  function Context(tryLocsList) {
-	    this.tryEntries = [{
-	      tryLoc: "root"
-	    }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
-	  }
-	  function values(iterable) {
-	    if (iterable) {
-	      var iteratorMethod = iterable[iteratorSymbol];
-	      if (iteratorMethod) return iteratorMethod.call(iterable);
-	      if ("function" == typeof iterable.next) return iterable;
-	      if (!isNaN(iterable.length)) {
-	        var i = -1,
-	          next = function next() {
-	            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
-	            return next.value = undefined, next.done = !0, next;
-	          };
-	        return next.next = next;
-	      }
-	    }
-	    return {
-	      next: doneResult
-	    };
-	  }
-	  function doneResult() {
-	    return {
-	      value: undefined,
-	      done: !0
-	    };
-	  }
-	  return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", {
-	    value: GeneratorFunctionPrototype,
-	    configurable: !0
-	  }), defineProperty(GeneratorFunctionPrototype, "constructor", {
-	    value: GeneratorFunction,
-	    configurable: !0
-	  }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
-	    var ctor = "function" == typeof genFun && genFun.constructor;
-	    return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
-	  }, exports.mark = function (genFun) {
-	    return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
-	  }, exports.awrap = function (arg) {
-	    return {
-	      __await: arg
-	    };
-	  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
-	    return this;
-	  }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-	    void 0 === PromiseImpl && (PromiseImpl = Promise);
-	    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
-	    return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
-	      return result.done ? result.value : iter.next();
-	    });
-	  }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
-	    return this;
-	  }), define(Gp, "toString", function () {
-	    return "[object Generator]";
-	  }), exports.keys = function (val) {
-	    var object = Object(val),
-	      keys = [];
-	    for (var key in object) keys.push(key);
-	    return keys.reverse(), function next() {
-	      for (; keys.length;) {
-	        var key = keys.pop();
-	        if (key in object) return next.value = key, next.done = !1, next;
-	      }
-	      return next.done = !0, next;
-	    };
-	  }, exports.values = values, Context.prototype = {
-	    constructor: Context,
-	    reset: function (skipTempReset) {
-	      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-	    },
-	    stop: function () {
-	      this.done = !0;
-	      var rootRecord = this.tryEntries[0].completion;
-	      if ("throw" === rootRecord.type) throw rootRecord.arg;
-	      return this.rval;
-	    },
-	    dispatchException: function (exception) {
-	      if (this.done) throw exception;
-	      var context = this;
-	      function handle(loc, caught) {
-	        return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
-	      }
-	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-	        var entry = this.tryEntries[i],
-	          record = entry.completion;
-	        if ("root" === entry.tryLoc) return handle("end");
-	        if (entry.tryLoc <= this.prev) {
-	          var hasCatch = hasOwn.call(entry, "catchLoc"),
-	            hasFinally = hasOwn.call(entry, "finallyLoc");
-	          if (hasCatch && hasFinally) {
-	            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-	            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-	          } else if (hasCatch) {
-	            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-	          } else {
-	            if (!hasFinally) throw new Error("try statement without catch or finally");
-	            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-	          }
-	        }
-	      }
-	    },
-	    abrupt: function (type, arg) {
-	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-	        var entry = this.tryEntries[i];
-	        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
-	          var finallyEntry = entry;
-	          break;
-	        }
-	      }
-	      finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
-	      var record = finallyEntry ? finallyEntry.completion : {};
-	      return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
-	    },
-	    complete: function (record, afterLoc) {
-	      if ("throw" === record.type) throw record.arg;
-	      return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
-	    },
-	    finish: function (finallyLoc) {
-	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-	        var entry = this.tryEntries[i];
-	        if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
-	      }
-	    },
-	    catch: function (tryLoc) {
-	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-	        var entry = this.tryEntries[i];
-	        if (entry.tryLoc === tryLoc) {
-	          var record = entry.completion;
-	          if ("throw" === record.type) {
-	            var thrown = record.arg;
-	            resetTryEntry(entry);
-	          }
-	          return thrown;
-	        }
-	      }
-	      throw new Error("illegal catch attempt");
-	    },
-	    delegateYield: function (iterable, resultName, nextLoc) {
-	      return this.delegate = {
-	        iterator: values(iterable),
-	        resultName: resultName,
-	        nextLoc: nextLoc
-	      }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
-	    }
-	  }, exports;
-	}
-	function _typeof(obj) {
-	  "@babel/helpers - typeof";
-
-	  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-	    return typeof obj;
-	  } : function (obj) {
-	    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-	  }, _typeof(obj);
-	}
-	function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-	  try {
-	    var info = gen[key](arg);
-	    var value = info.value;
-	  } catch (error) {
-	    reject(error);
-	    return;
-	  }
-	  if (info.done) {
-	    resolve(value);
-	  } else {
-	    Promise.resolve(value).then(_next, _throw);
-	  }
-	}
-	function _asyncToGenerator(fn) {
-	  return function () {
-	    var self = this,
-	      args = arguments;
-	    return new Promise(function (resolve, reject) {
-	      var gen = fn.apply(self, args);
-	      function _next(value) {
-	        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-	      }
-	      function _throw(err) {
-	        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-	      }
-	      _next(undefined);
-	    });
-	  };
-	}
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	}
-	function _defineProperties(target, props) {
-	  for (var i = 0; i < props.length; i++) {
-	    var descriptor = props[i];
-	    descriptor.enumerable = descriptor.enumerable || false;
-	    descriptor.configurable = true;
-	    if ("value" in descriptor) descriptor.writable = true;
-	    Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-	  }
-	}
-	function _createClass(Constructor, protoProps, staticProps) {
-	  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-	  if (staticProps) _defineProperties(Constructor, staticProps);
-	  Object.defineProperty(Constructor, "prototype", {
-	    writable: false
-	  });
-	  return Constructor;
-	}
-	function _defineProperty(obj, key, value) {
-	  key = _toPropertyKey(key);
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, {
-	      value: value,
-	      enumerable: true,
-	      configurable: true,
-	      writable: true
-	    });
-	  } else {
-	    obj[key] = value;
-	  }
-	  return obj;
-	}
-	function _extends() {
-	  _extends = Object.assign ? Object.assign.bind() : function (target) {
-	    for (var i = 1; i < arguments.length; i++) {
-	      var source = arguments[i];
-	      for (var key in source) {
-	        if (Object.prototype.hasOwnProperty.call(source, key)) {
-	          target[key] = source[key];
-	        }
-	      }
-	    }
-	    return target;
-	  };
-	  return _extends.apply(this, arguments);
-	}
-	function _objectDestructuringEmpty(obj) {
-	  if (obj == null) throw new TypeError("Cannot destructure " + obj);
-	}
-	function _objectWithoutPropertiesLoose(source, excluded) {
-	  if (source == null) return {};
-	  var target = {};
-	  var sourceKeys = Object.keys(source);
-	  var key, i;
-	  for (i = 0; i < sourceKeys.length; i++) {
-	    key = sourceKeys[i];
-	    if (excluded.indexOf(key) >= 0) continue;
-	    target[key] = source[key];
-	  }
-	  return target;
-	}
-	function _objectWithoutProperties(source, excluded) {
-	  if (source == null) return {};
-	  var target = _objectWithoutPropertiesLoose(source, excluded);
-	  var key, i;
-	  if (Object.getOwnPropertySymbols) {
-	    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-	    for (i = 0; i < sourceSymbolKeys.length; i++) {
-	      key = sourceSymbolKeys[i];
-	      if (excluded.indexOf(key) >= 0) continue;
-	      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-	      target[key] = source[key];
-	    }
-	  }
-	  return target;
-	}
-	function _slicedToArray(arr, i) {
-	  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-	}
-	function _toConsumableArray(arr) {
-	  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-	}
-	function _arrayWithoutHoles(arr) {
-	  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-	}
-	function _arrayWithHoles(arr) {
-	  if (Array.isArray(arr)) return arr;
-	}
-	function _iterableToArray(iter) {
-	  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-	}
-	function _unsupportedIterableToArray(o, minLen) {
-	  if (!o) return;
-	  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-	  var n = Object.prototype.toString.call(o).slice(8, -1);
-	  if (n === "Object" && o.constructor) n = o.constructor.name;
-	  if (n === "Map" || n === "Set") return Array.from(o);
-	  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-	}
-	function _arrayLikeToArray(arr, len) {
-	  if (len == null || len > arr.length) len = arr.length;
-	  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-	  return arr2;
-	}
-	function _nonIterableSpread() {
-	  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-	}
-	function _nonIterableRest() {
-	  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-	}
-	function _createForOfIteratorHelper(o, allowArrayLike) {
-	  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-	  if (!it) {
-	    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-	      if (it) o = it;
-	      var i = 0;
-	      var F = function () {};
-	      return {
-	        s: F,
-	        n: function () {
-	          if (i >= o.length) return {
-	            done: true
-	          };
-	          return {
-	            done: false,
-	            value: o[i++]
-	          };
-	        },
-	        e: function (e) {
-	          throw e;
-	        },
-	        f: F
-	      };
-	    }
-	    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-	  }
-	  var normalCompletion = true,
-	    didErr = false,
-	    err;
-	  return {
-	    s: function () {
-	      it = it.call(o);
-	    },
-	    n: function () {
-	      var step = it.next();
-	      normalCompletion = step.done;
-	      return step;
-	    },
-	    e: function (e) {
-	      didErr = true;
-	      err = e;
-	    },
-	    f: function () {
-	      try {
-	        if (!normalCompletion && it.return != null) it.return();
-	      } finally {
-	        if (didErr) throw err;
-	      }
-	    }
-	  };
-	}
-	function _toPrimitive(input, hint) {
-	  if (typeof input !== "object" || input === null) return input;
-	  var prim = input[Symbol.toPrimitive];
-	  if (prim !== undefined) {
-	    var res = prim.call(input, hint || "default");
-	    if (typeof res !== "object") return res;
-	    throw new TypeError("@@toPrimitive must return a primitive value.");
-	  }
-	  return (hint === "string" ? String : Number)(input);
-	}
-	function _toPropertyKey(arg) {
-	  var key = _toPrimitive(arg, "string");
-	  return typeof key === "symbol" ? key : String(key);
-	}
-
 	var DefaultContext = {
 	  color: undefined,
 	  size: undefined,
@@ -33960,8 +33392,7 @@
 	// i.e. when the overlay is clicked and when some function manually triggers it,
 	// we create a separate function for it to keep things DRY.
 	function hideOverlay() {
-	  var _hideFunctionRef$curr, _hideFunctionRef2;
-	  (_hideFunctionRef$curr = (_hideFunctionRef2 = hideFunctionRef).current) === null || _hideFunctionRef$curr === void 0 ? void 0 : _hideFunctionRef$curr.call(_hideFunctionRef2);
+	  hideFunctionRef.current?.();
 	  hideFunctionRef.current = null;
 	  setShown(false);
 	}
@@ -33978,27 +33409,24 @@
 	}
 	function Overlay() {
 	  overlayRendered = true;
-	  var _useState = reactExports.useState(false),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    shown = _useState2[0],
-	    _setShown = _useState2[1];
-	  var _hideFunctionRef = reactExports.useRef();
-	  var _widthRef = reactExports.useRef();
-	  reactExports.useEffect(function () {
+	  const [shown, _setShown] = reactExports.useState(false);
+	  const _hideFunctionRef = reactExports.useRef();
+	  const _widthRef = reactExports.useRef();
+	  reactExports.useEffect(() => {
 	    setShown = _setShown;
 	    hideFunctionRef = _hideFunctionRef;
 	    widthRef = _widthRef;
 	  }, []);
-	  reactExports.useEffect(function () {
+	  reactExports.useEffect(() => {
 	    if (shown && widthRef.current) {
 	      window.addEventListener('resize', resizeHandler);
-	      return function () {
+	      return () => {
 	        window.removeEventListener('resize', resizeHandler);
 	      };
 	    }
 	  }, [_widthRef.current]);
-	  var location = useLocation();
-	  reactExports.useEffect(function () {
+	  const location = useLocation();
+	  reactExports.useEffect(() => {
 	    hideOverlay();
 	  }, [location]);
 	  function onClick() {
@@ -34013,26 +33441,32 @@
 	  });
 	}
 
-	var _excluded$a = ["name", "className", "value", "width", "size", "onChange"];
-	function TextInput(_ref) {
-	  var _classNames;
-	  var name = _ref.name,
-	    className = _ref.className,
-	    _ref$value = _ref.value,
-	    value = _ref$value === void 0 ? '' : _ref$value,
-	    _ref$width = _ref.width,
-	    width = _ref$width === void 0 ? 'small' : _ref$width,
-	    size = _ref.size,
-	    _ref$onChange = _ref.onChange,
-	    onChange = _ref$onChange === void 0 ? function (x) {
-	      return x;
-	    } : _ref$onChange,
-	    props = _objectWithoutProperties(_ref, _excluded$a);
-	  var _useState = reactExports.useState(value),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    _value = _useState2[0],
-	    setValue = _useState2[1];
-	  reactExports.useEffect(function () {
+	function _extends() {
+	  _extends = Object.assign ? Object.assign.bind() : function (target) {
+	    for (var i = 1; i < arguments.length; i++) {
+	      var source = arguments[i];
+	      for (var key in source) {
+	        if (Object.prototype.hasOwnProperty.call(source, key)) {
+	          target[key] = source[key];
+	        }
+	      }
+	    }
+	    return target;
+	  };
+	  return _extends.apply(this, arguments);
+	}
+
+	function TextInput({
+	  name,
+	  className,
+	  value = '',
+	  width = 'small',
+	  size,
+	  onChange = x => x,
+	  ...props
+	}) {
+	  const [_value, setValue] = reactExports.useState(value);
+	  reactExports.useEffect(() => {
 	    setValue(value);
 	  }, [value]);
 	  function _onChange(e) {
@@ -34043,33 +33477,28 @@
 	    type: "text",
 	    value: _value,
 	    name: name,
-	    className: classNames((_classNames = {
-	      'input-text': true
-	    }, _defineProperty(_classNames, className, className), _defineProperty(_classNames, "input-size--".concat(size), size), _defineProperty(_classNames, "input-width--".concat(width), width), _classNames))
+	    className: classNames({
+	      'input-text': true,
+	      [className]: className,
+	      [`input-size--${size}`]: size,
+	      [`input-width--${width}`]: width
+	    })
 	  }, props, {
 	    onChange: _onChange,
 	    autoComplete: "off"
 	  })));
 	}
 
-	var _excluded$9 = ["name", "className", "size", "value", "onChange"];
-	function TextAreaInput(_ref) {
-	  var _classNames;
-	  var name = _ref.name,
-	    className = _ref.className,
-	    size = _ref.size,
-	    _ref$value = _ref.value,
-	    value = _ref$value === void 0 ? '' : _ref$value,
-	    _ref$onChange = _ref.onChange,
-	    onChange = _ref$onChange === void 0 ? function (x) {
-	      return x;
-	    } : _ref$onChange,
-	    props = _objectWithoutProperties(_ref, _excluded$9);
-	  var _useState = reactExports.useState(value),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    _value = _useState2[0],
-	    setValue = _useState2[1];
-	  reactExports.useEffect(function () {
+	function TextAreaInput({
+	  name,
+	  className,
+	  size,
+	  value = '',
+	  onChange = x => x,
+	  ...props
+	}) {
+	  const [_value, setValue] = reactExports.useState(value);
+	  reactExports.useEffect(() => {
 	    setValue(value);
 	  }, [value]);
 	  function _onChange(e) {
@@ -34080,113 +33509,90 @@
 	    type: "text",
 	    value: _value,
 	    name: name,
-	    className: classNames((_classNames = {
-	      'input-textarea': true
-	    }, _defineProperty(_classNames, "input-textarea--".concat(size), size), _defineProperty(_classNames, className, className), _classNames))
+	    className: classNames({
+	      'input-textarea': true,
+	      [`input-textarea--${size}`]: size,
+	      [className]: className
+	    })
 	  }, props, {
 	    onChange: _onChange,
 	    autoComplete: "off"
 	  })));
 	}
 
-	function RatingInput(_ref) {
-	  var _rating = _ref.rating,
-	    _ref$stars = _ref.stars,
-	    stars = _ref$stars === void 0 ? 5 : _ref$stars;
-	  var _useState = reactExports.useState(_rating),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    previousRating = _useState2[0],
-	    setPreviousRating = _useState2[1];
-	  var _useState3 = reactExports.useState(_rating),
-	    _useState4 = _slicedToArray(_useState3, 2),
-	    rating = _useState4[0],
-	    setRating = _useState4[1];
+	function RatingInput({
+	  rating: _rating,
+	  stars = 5
+	}) {
+	  const [previousRating, setPreviousRating] = reactExports.useState(_rating);
+	  const [rating, setRating] = reactExports.useState(_rating);
 	  return /*#__PURE__*/React.createElement("div", {
 	    className: "input-group input-group--basic input-rating"
 	  }, /*#__PURE__*/React.createElement("input", {
 	    name: "rating",
 	    type: "hidden",
 	    value: previousRating
-	  }), new Array(stars).fill().map(function (_, i) {
-	    return /*#__PURE__*/React.createElement("button", {
-	      type: "button",
-	      key: i,
-	      onMouseEnter: function onMouseEnter() {
-	        return setRating(i + 1);
-	      },
-	      onMouseLeave: function onMouseLeave() {
-	        return setRating(previousRating);
-	      },
-	      className: classNames({
-	        'star-input': true,
-	        'star-input--sel': i < rating
-	      }),
-	      onClick: function onClick() {
-	        setPreviousRating(i + 1);
-	        setRating(i + 1);
-	      }
-	    }, /*#__PURE__*/React.createElement(FaStar, null));
-	  }));
+	  }), new Array(stars).fill().map((_, i) => /*#__PURE__*/React.createElement("button", {
+	    type: "button",
+	    key: i,
+	    onMouseEnter: () => setRating(i + 1),
+	    onMouseLeave: () => setRating(previousRating),
+	    className: classNames({
+	      'star-input': true,
+	      'star-input--sel': i < rating
+	    }),
+	    onClick: () => {
+	      setPreviousRating(i + 1);
+	      setRating(i + 1);
+	    }
+	  }, /*#__PURE__*/React.createElement(FaStar, null))));
 	}
 
-	function loadData(_x, _x2, _x3) {
-	  return _loadData.apply(this, arguments);
+	async function loadData(data, dispatchForAutocompleter, dispatchForSuggestionsBox) {
+	  if (data instanceof Promise) {
+	    var loadedData = await data;
+	    dispatchForAutocompleter({
+	      type: 'dataLoad',
+	      data: loadedData,
+	      dispatchForSuggestionsBox
+	    });
+	  }
 	}
+
 	/*******************************************************************************
 	Reducer
 	*******************************************************************************/
-	function _loadData() {
-	  _loadData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(data, dispatchForAutocompleter, dispatchForSuggestionsBox) {
-	    var loadedData;
-	    return _regeneratorRuntime().wrap(function _callee$(_context) {
-	      while (1) switch (_context.prev = _context.next) {
-	        case 0:
-	          if (!(data instanceof Promise)) {
-	            _context.next = 5;
-	            break;
-	          }
-	          _context.next = 3;
-	          return data;
-	        case 3:
-	          loadedData = _context.sent;
-	          dispatchForAutocompleter({
-	            type: 'dataLoad',
-	            data: loadedData,
-	            dispatchForSuggestionsBox: dispatchForSuggestionsBox
-	          });
-	        case 5:
-	        case "end":
-	          return _context.stop();
-	      }
-	    }, _callee);
-	  }));
-	  return _loadData.apply(this, arguments);
-	}
 	function autocompleterReducer(state, action) {
 	  switch (action.type) {
 	    case 'init':
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
+	      return {
+	        ...state,
 	        value: action.value
-	      });
+	      };
 	    case 'input':
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
+	      return {
+	        ...state,
+	        entryClicked: false,
 	        value: action.value,
 	        hiddenValue: action.value
-	      });
+	      };
 	    case 'inputBlur':
-	      var firstSuggestion = action.suggestions[0];
-	      if (firstSuggestion) {
-	        return _objectSpread2(_objectSpread2({}, state), {}, {
+	      const firstSuggestion = action.suggestions[0];
+	      if (firstSuggestion && !state.entryClicked) {
+	        return {
+	          ...state,
 	          hiddenValue: state.getHiddenInputValue(firstSuggestion)
-	        });
+	        };
 	      }
 	      return state;
 	    case 'entryClick':
 	      if (action.suggestion) {
-	        return _objectSpread2(_objectSpread2({}, state), {}, {
+	        return {
+	          ...state,
+	          entryClicked: true,
 	          value: state.getInputValue(action.suggestion),
 	          hiddenValue: state.getHiddenInputValue(action.suggestion)
-	        });
+	        };
 	      }
 	    case 'inputFocus':
 	      if (state.data instanceof Promise) {
@@ -34199,9 +33605,10 @@
 	        value: state.value,
 	        data: action.data
 	      });
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
+	      return {
+	        ...state,
 	        data: action.data
-	      });
+	      };
 	    default:
 	      return state;
 	  }
@@ -34214,7 +33621,7 @@
 	  return data.filter(state.filterFunction.bind(null, value));
 	}
 	function handleNavigation(state, direction) {
-	  var suggestions = state.suggestions;
+	  const suggestions = state.suggestions;
 	  var entrySelected = state.entrySelected;
 	  if (!suggestions.length) {
 	    return -1;
@@ -34237,35 +33644,40 @@
 	      if (action.value === '' && !state.allOnEmpty) {
 	        isShown = false;
 	      }
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
-	        isShown: isShown,
+	      return {
+	        ...state,
+	        isShown,
 	        entrySelected: -1,
 	        suggestions: handleInput(state, action.value, action.data)
-	      });
+	      };
 	    case 'navigation':
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
+	      return {
+	        ...state,
 	        entrySelected: handleNavigation(state, action.direction)
-	      });
+	      };
 	    case 'inputBlur':
 	    case 'entryClick':
 	    case 'escPress':
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
+	      return {
+	        ...state,
 	        entrySelected: -1,
 	        isShown: false
-	      });
+	      };
 	    case 'inputFocus':
 	      var isShown = true;
 	      if (action.value === '' && !state.allOnEmpty) {
 	        isShown = false;
 	      }
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
+	      return {
+	        ...state,
 	        suggestions: handleInput(state, action.value, action.data),
-	        isShown: isShown
-	      });
+	        isShown
+	      };
 	    case 'dataLoad':
-	      return _objectSpread2(_objectSpread2({}, state), {}, {
+	      return {
+	        ...state,
 	        suggestions: handleInput(state, action.value, action.data)
-	      });
+	      };
 	  }
 	}
 
@@ -34278,31 +33690,33 @@
 	  var elementOffsetBottom = parent.offsetHeight - (elementOffsetTop + element.offsetHeight);
 	  return [0 <= elementOffsetTop && 0 <= elementOffsetBottom, elementOffsetTop < 0 ? elementOffsetTop : -elementOffsetBottom];
 	}
-	function SuggestionsBox(_ref) {
-	  var autocompleter = _ref.autocompleter,
-	    dispatchForAutocompleter = _ref.dispatchForAutocompleter,
-	    suggestionsBox = _ref.suggestionsBox,
-	    dispatchForSuggestionsBox = _ref.dispatchForSuggestionsBox;
-	  var data = autocompleter.data,
-	    value = autocompleter.value;
-	  var suggestions = suggestionsBox.suggestions,
-	    entrySelected = suggestionsBox.entrySelected,
-	    isShown = suggestionsBox.isShown,
-	    noMatchText = suggestionsBox.noMatchText,
-	    getSuggestionValue = suggestionsBox.getSuggestionValue;
-	  var suggestionsBoxElement = reactExports.useRef();
-	  reactExports.useEffect(function () {
+	function SuggestionsBox({
+	  autocompleter,
+	  dispatchForAutocompleter,
+	  suggestionsBox,
+	  dispatchForSuggestionsBox
+	}) {
+	  const {
+	    data,
+	    value
+	  } = autocompleter;
+	  const {
+	    suggestions,
+	    entrySelected,
+	    isShown,
+	    noMatchText,
+	    getSuggestionValue
+	  } = suggestionsBox;
+	  const suggestionsBoxElement = reactExports.useRef();
+	  reactExports.useEffect(() => {
 	    if (entrySelected !== -1) {
-	      var selectedSuggestionElement = suggestionsBoxElement.current.querySelectorAll('.autocomplete_suggestion')[entrySelected];
+	      const selectedSuggestionElement = suggestionsBoxElement.current.querySelectorAll('.autocomplete_suggestion')[entrySelected];
 	      if (!isElementInViewport(suggestionsBoxElement.current)) {
 	        suggestionsBoxElement.current.scrollIntoView({
 	          block: 'center'
 	        });
 	      }
-	      var _isElementInParent = isElementInParent(selectedSuggestionElement, suggestionsBoxElement.current),
-	        _isElementInParent2 = _slicedToArray(_isElementInParent, 2),
-	        elementIsVisible = _isElementInParent2[0],
-	        additionalScrollTop = _isElementInParent2[1];
+	      const [elementIsVisible, additionalScrollTop] = isElementInParent(selectedSuggestionElement, suggestionsBoxElement.current);
 	      if (!elementIsVisible) {
 	        suggestionsBoxElement.current.scrollTop += additionalScrollTop;
 	      }
@@ -34315,7 +33729,7 @@
 	    dispatchForAutocompleter({
 	      type: 'entryClick',
 	      entryClicked: i,
-	      suggestion: suggestion
+	      suggestion
 	    });
 	    dispatchForSuggestionsBox({
 	      type: 'entryClick'
@@ -34327,84 +33741,59 @@
 	    onMouseDown: onMouseDown
 	  }, data instanceof Promise ? /*#__PURE__*/React.createElement("div", {
 	    className: "autocomplete_text"
-	  }, "Loading...") : suggestions.length ? suggestions.map(function (suggestion, i) {
-	    return /*#__PURE__*/React.createElement("div", {
-	      key: i,
-	      onClick: function onClick() {
-	        return onSuggestionClick(i, suggestion);
-	      },
-	      className: classNames({
-	        'autocomplete_suggestion': true,
-	        'autocomplete_suggestion--sel': i === entrySelected
-	      })
-	    }, getSuggestionValue(suggestion));
-	  }) : /*#__PURE__*/React.createElement("div", {
+	  }, "Loading...") : suggestions.length ? suggestions.map((suggestion, i) => /*#__PURE__*/React.createElement("div", {
+	    key: i,
+	    onClick: () => onSuggestionClick(i, suggestion),
+	    className: classNames({
+	      'autocomplete_suggestion': true,
+	      'autocomplete_suggestion--sel': i === entrySelected
+	    })
+	  }, getSuggestionValue(suggestion))) : /*#__PURE__*/React.createElement("div", {
 	    className: "autocomplete_text"
 	  }, typeof noMatchText === 'function' ? noMatchText(value) : noMatchText));
 	}
 
-	var _excluded$8 = ["value", "hiddenValue", "name", "data", "allOnEmpty", "hideOnEsc", "noMatchText", "getInputValue", "getHiddenInputValue", "getSuggestionValue", "filterFunction", "className"];
-	function AutocompleteInput(_ref) {
-	  var _ref$value = _ref.value,
-	    value = _ref$value === void 0 ? '' : _ref$value,
-	    hiddenValue = _ref.hiddenValue,
-	    name = _ref.name,
-	    data = _ref.data,
-	    _ref$allOnEmpty = _ref.allOnEmpty,
-	    allOnEmpty = _ref$allOnEmpty === void 0 ? false : _ref$allOnEmpty,
-	    _ref$hideOnEsc = _ref.hideOnEsc,
-	    hideOnEsc = _ref$hideOnEsc === void 0 ? true : _ref$hideOnEsc,
-	    _ref$noMatchText = _ref.noMatchText,
-	    noMatchText = _ref$noMatchText === void 0 ? 'Nothing found' : _ref$noMatchText,
-	    _ref$getInputValue = _ref.getInputValue,
-	    getInputValue = _ref$getInputValue === void 0 ? function (s) {
-	      return s;
-	    } : _ref$getInputValue,
-	    _ref$getHiddenInputVa = _ref.getHiddenInputValue,
-	    getHiddenInputValue = _ref$getHiddenInputVa === void 0 ? function (s) {
-	      return s;
-	    } : _ref$getHiddenInputVa,
-	    _ref$getSuggestionVal = _ref.getSuggestionValue,
-	    getSuggestionValue = _ref$getSuggestionVal === void 0 ? function (s) {
-	      return s;
-	    } : _ref$getSuggestionVal,
-	    _ref$filterFunction = _ref.filterFunction,
-	    filterFunction = _ref$filterFunction === void 0 ? function (value, s) {
-	      return s.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-	    } : _ref$filterFunction,
-	    className = _ref.className,
-	    props = _objectWithoutProperties(_ref, _excluded$8);
-	  var _useReducer = reactExports.useReducer(autocompleterReducer, {
-	      value: value,
-	      hiddenValue: hiddenValue || value,
-	      data: data,
-	      getInputValue: getInputValue,
-	      getHiddenInputValue: getHiddenInputValue
-	    }),
-	    _useReducer2 = _slicedToArray(_useReducer, 2),
-	    autocompleter = _useReducer2[0],
-	    dispatchForAutocompleter = _useReducer2[1];
-	  reactExports.useEffect(function () {
+	function AutocompleteInput({
+	  value = '',
+	  hiddenValue,
+	  name,
+	  data,
+	  allOnEmpty = false,
+	  hideOnEsc = true,
+	  noMatchText = 'Nothing found',
+	  getInputValue = s => s,
+	  getHiddenInputValue = s => s,
+	  getSuggestionValue = s => s,
+	  filterFunction = (value, s) => s.toLowerCase().indexOf(value.toLowerCase()) !== -1,
+	  className,
+	  ...props
+	}) {
+	  const [autocompleter, dispatchForAutocompleter] = reactExports.useReducer(autocompleterReducer, {
+	    value,
+	    entryClicked: false,
+	    hiddenValue: hiddenValue || value,
+	    data,
+	    getInputValue,
+	    getHiddenInputValue
+	  });
+	  reactExports.useEffect(() => {
 	    dispatchForAutocompleter({
 	      type: 'init',
 	      value: value
 	    });
 	  }, [value]);
-	  var _useReducer3 = reactExports.useReducer(suggestionsBoxReducer, {
-	      // The index of the entry selected.
-	      entrySelected: -1,
-	      // Whether or not the suggestion box is shown.
-	      isShown: false,
-	      // The list of matching suggestions.
-	      suggestions: data,
-	      allOnEmpty: allOnEmpty,
-	      filterFunction: filterFunction,
-	      getSuggestionValue: getSuggestionValue,
-	      noMatchText: noMatchText
-	    }),
-	    _useReducer4 = _slicedToArray(_useReducer3, 2),
-	    suggestionsBox = _useReducer4[0],
-	    dispatchForSuggestionsBox = _useReducer4[1];
+	  const [suggestionsBox, dispatchForSuggestionsBox] = reactExports.useReducer(suggestionsBoxReducer, {
+	    // The index of the entry selected.
+	    entrySelected: -1,
+	    // Whether or not the suggestion box is shown.
+	    isShown: false,
+	    // The list of matching suggestions.
+	    suggestions: data,
+	    allOnEmpty,
+	    filterFunction,
+	    getSuggestionValue,
+	    noMatchText
+	  });
 	  function onChange(e) {
 	    dispatchForAutocompleter({
 	      type: 'input',
@@ -34454,8 +33843,8 @@
 	  function onFocus(e) {
 	    dispatchForAutocompleter({
 	      type: 'inputFocus',
-	      dispatchForAutocompleter: dispatchForAutocompleter,
-	      dispatchForSuggestionsBox: dispatchForSuggestionsBox
+	      dispatchForAutocompleter,
+	      dispatchForSuggestionsBox
 	    });
 	    dispatchForSuggestionsBox({
 	      type: 'inputFocus',
@@ -34488,10 +33877,10 @@
 	    type: "hidden",
 	    value: autocompleter.hiddenValue
 	  }), /*#__PURE__*/React.createElement(SuggestionsBox, {
-	    autocompleter: autocompleter,
-	    dispatchForAutocompleter: dispatchForAutocompleter,
-	    suggestionsBox: suggestionsBox,
-	    dispatchForSuggestionsBox: dispatchForSuggestionsBox
+	    autocompleter,
+	    dispatchForAutocompleter,
+	    suggestionsBox,
+	    dispatchForSuggestionsBox
 	  }));
 	}
 
@@ -34666,43 +34055,46 @@
 	  })(props);
 	}
 
-	var _excluded$7 = ["submit", "type", "small", "error", "children", "className"];
-	function Button(_ref) {
-	  var _classNames;
-	  var _ref$submit = _ref.submit,
-	    submit = _ref$submit === void 0 ? false : _ref$submit,
-	    _ref$type = _ref.type,
-	    type = _ref$type === void 0 ? 'primary' : _ref$type,
-	    small = _ref.small,
-	    error = _ref.error,
-	    children = _ref.children,
-	    _ref$className = _ref.className,
-	    className = _ref$className === void 0 ? '' : _ref$className,
-	    props = _objectWithoutProperties(_ref, _excluded$7);
+	function Button({
+	  submit = false,
+	  type = 'primary',
+	  small,
+	  error,
+	  children,
+	  className = '',
+	  ...props
+	}) {
 	  return /*#__PURE__*/React.createElement("button", _extends({
 	    type: submit ? 'submit' : 'button',
-	    className: classNames((_classNames = {
-	      'btn': true
-	    }, _defineProperty(_classNames, "btn--".concat(type), type), _defineProperty(_classNames, 'btn--small', small), _defineProperty(_classNames, 'btn--error', error), _defineProperty(_classNames, className, true), _classNames))
+	    className: classNames({
+	      'btn': true,
+	      [`btn--${type}`]: type,
+	      'btn--small': small,
+	      'btn--error': error,
+	      [className]: true
+	    })
 	  }, props), children);
 	}
 
-	function DefaultRemoveButton(_ref) {
-	  var onClick = _ref.onClick;
+	function DefaultRemoveButton({
+	  onClick
+	}) {
 	  return /*#__PURE__*/React.createElement(Button, {
 	    type: "light",
 	    onClick: onClick
 	  }, /*#__PURE__*/React.createElement(BiTrash, null));
 	}
-	function DefaultAddButton(_ref2) {
-	  var onClick = _ref2.onClick;
+	function DefaultAddButton({
+	  onClick
+	}) {
 	  return /*#__PURE__*/React.createElement(Button, {
 	    type: "light",
 	    onClick: onClick
 	  }, /*#__PURE__*/React.createElement(BiPlus, null));
 	}
-	function DefaultInsertButton(_ref3) {
-	  var onClick = _ref3.onClick;
+	function DefaultInsertButton({
+	  onClick
+	}) {
 	  return /*#__PURE__*/React.createElement(Button, {
 	    type: "light",
 	    onClick: onClick
@@ -34712,61 +34104,51 @@
 	  return i + '' + Number(new Date());
 	}
 	function useInputList(initialList) {
-	  var _useState = reactExports.useState(initialList.length === 0 ? [[]] : initialList),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    list = _useState2[0],
-	    setList = _useState2[1];
-	  var computedKeys = reactExports.useMemo(function () {
-	    return list.map(function (_, i) {
+	  const [list, setList] = reactExports.useState(initialList.length === 0 ? [[]] : initialList);
+	  const computedKeys = reactExports.useMemo(() => {
+	    return list.map((_, i) => {
 	      return i;
 	      // return i + '' + Number(new Date());
 	    });
 	  }, []);
-	  var _useState3 = reactExports.useState(computedKeys),
-	    _useState4 = _slicedToArray(_useState3, 2),
-	    keys = _useState4[0],
-	    setKeys = _useState4[1];
+	  const [keys, setKeys] = reactExports.useState(computedKeys);
 	  function add(i) {
 	    if (i === undefined) {
-	      setList([].concat(_toConsumableArray(list), [[]]));
-	      setKeys([].concat(_toConsumableArray(keys), [getUniqueKey(keys.length)]));
+	      setList([...list, []]);
+	      setKeys([...keys, getUniqueKey(keys.length)]);
 	    } else {
-	      setList([].concat(_toConsumableArray(list.slice(0, i)), [[]], _toConsumableArray(list.slice(i))));
-	      setKeys([].concat(_toConsumableArray(keys.slice(0, i)), [getUniqueKey(i)], _toConsumableArray(keys.slice(i))));
+	      setList([...list.slice(0, i), [], ...list.slice(i)]);
+	      setKeys([...keys.slice(0, i), getUniqueKey(i), ...keys.slice(i)]);
 	    }
 	  }
 	  function remove(i) {
-	    setList(list.filter(function (_, _i) {
-	      return i !== _i;
-	    }));
-	    setKeys(keys.filter(function (_, _i) {
-	      return i !== _i;
-	    }));
+	    setList(list.filter((_, _i) => i !== _i));
+	    setKeys(keys.filter((_, _i) => i !== _i));
 	  }
 	  return {
-	    keys: keys,
-	    list: list,
-	    add: add,
-	    remove: remove
+	    keys,
+	    list,
+	    add,
+	    remove
 	  };
 	}
-	function InputList(_ref4) {
-	  var _ref4$list = _ref4.list,
-	    initialList = _ref4$list === void 0 ? [] : _ref4$list,
-	    _ref4$focusInput = _ref4.focusInput,
-	    focusInput = _ref4$focusInput === void 0 ? false : _ref4$focusInput,
-	    addButton = _ref4.addButton,
-	    insertButton = _ref4.insertButton,
-	    removeButton = _ref4.removeButton,
-	    children = _ref4.children;
-	  var _useInputList = useInputList(initialList),
-	    list = _useInputList.list,
-	    keys = _useInputList.keys,
-	    add = _useInputList.add,
-	    remove = _useInputList.remove;
-	  var divElement = reactExports.useRef();
-	  var clicked = reactExports.useRef(false);
-	  reactExports.useEffect(function () {
+	function InputList({
+	  list: initialList = [],
+	  focusInput = false,
+	  addButton,
+	  insertButton,
+	  removeButton,
+	  children
+	}) {
+	  const {
+	    list,
+	    keys,
+	    add,
+	    remove
+	  } = useInputList(initialList);
+	  const divElement = reactExports.useRef();
+	  const clicked = reactExports.useRef(false);
+	  reactExports.useEffect(() => {
 	    if (focusInput && clicked.current) {
 	      var inputGroupElement;
 	      if (clicked.focusIndex === null) {
@@ -34774,7 +34156,7 @@
 	      } else {
 	        inputGroupElement = divElement.current.children[clicked.focusIndex];
 	      }
-	      setTimeout(function () {
+	      setTimeout(() => {
 	        inputGroupElement.getElementsByTagName('input')[0].focus();
 	      }, 0);
 	      clicked.current = false;
@@ -34793,47 +34175,39 @@
 	  function onRemoveClick(i) {
 	    remove(i);
 	  }
-	  var AddButton = addButton ? addButton : DefaultAddButton;
-	  var RemoveButton = removeButton ? removeButton : DefaultRemoveButton;
-	  var InsertButton = insertButton ? insertButton : DefaultInsertButton;
+	  const AddButton = addButton ? addButton : DefaultAddButton;
+	  const RemoveButton = removeButton ? removeButton : DefaultRemoveButton;
+	  const InsertButton = insertButton ? insertButton : DefaultInsertButton;
 	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
 	    ref: divElement
-	  }, list.map(function (_, i) {
-	    return /*#__PURE__*/React.createElement(React.Fragment, {
-	      key: keys[i]
-	    }, children(list[i], /*#__PURE__*/React.createElement(RemoveButton, {
-	      onClick: function onClick() {
-	        return onRemoveClick(i);
-	      }
-	    }), /*#__PURE__*/React.createElement(InsertButton, {
-	      onClick: function onClick() {
-	        return onInsertClick(i);
-	      }
-	    })));
-	  })), /*#__PURE__*/React.createElement(AddButton, {
+	  }, list.map((_, i) => /*#__PURE__*/React.createElement(React.Fragment, {
+	    key: keys[i]
+	  }, children(list[i], /*#__PURE__*/React.createElement(RemoveButton, {
+	    onClick: () => onRemoveClick(i)
+	  }), /*#__PURE__*/React.createElement(InsertButton, {
+	    onClick: () => onInsertClick(i)
+	  }))))), /*#__PURE__*/React.createElement(AddButton, {
 	    onClick: onClick
 	  }));
 	}
 
-	var _excluded$6 = ["label", "inline", "basic", "bg", "className", "children"];
-	function InputGroup(_ref) {
-	  var label = _ref.label,
-	    _ref$inline = _ref.inline,
-	    inline = _ref$inline === void 0 ? false : _ref$inline,
-	    _ref$basic = _ref.basic,
-	    basic = _ref$basic === void 0 ? false : _ref$basic,
-	    _ref$bg = _ref.bg,
-	    bg = _ref$bg === void 0 ? false : _ref$bg,
-	    className = _ref.className,
-	    children = _ref.children,
-	    props = _objectWithoutProperties(_ref, _excluded$6);
+	function InputGroup({
+	  label,
+	  inline = false,
+	  basic = false,
+	  bg = false,
+	  className,
+	  children,
+	  ...props
+	}) {
 	  return /*#__PURE__*/React.createElement("div", _extends({
-	    className: classNames(_defineProperty({
+	    className: classNames({
 	      'input-group': !inline,
 	      'input-group--inline': inline,
 	      'input-group--basic': basic,
-	      'input-group--bg': bg
-	    }, className, className))
+	      'input-group--bg': bg,
+	      [className]: className
+	    })
 	  }, props), label && /*#__PURE__*/React.createElement("div", {
 	    className: "input-label"
 	  }, label), children);
@@ -34844,12 +34218,12 @@
 	  }, props));
 	}
 
-	var _excluded$5 = ["to", "children"];
-	function LinkButton(_ref) {
-	  var to = _ref.to,
-	    children = _ref.children,
-	    props = _objectWithoutProperties(_ref, _excluded$5);
-	  var navigate = useNavigate();
+	function LinkButton({
+	  to,
+	  children,
+	  ...props
+	}) {
+	  const navigate = useNavigate();
 	  function onClick() {
 	    if (to) {
 	      navigate(to);
@@ -34861,34 +34235,20 @@
 	  }, props), children);
 	}
 
-	var _excluded$4 = ["children", "loader", "loadingText", "disabled"];
-	function LoadingButton(_ref) {
-	  var children = _ref.children,
-	    loader = _ref.loader,
-	    _ref$loadingText = _ref.loadingText,
-	    loadingText = _ref$loadingText === void 0 ? '' : _ref$loadingText,
-	    disabled = _ref.disabled,
-	    props = _objectWithoutProperties(_ref, _excluded$4);
-	  var _useState = reactExports.useState(false),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    loading = _useState2[0],
-	    setLoading = _useState2[1];
+	function LoadingButton({
+	  children,
+	  loader,
+	  loadingText = '',
+	  disabled,
+	  ...props
+	}) {
+	  const [loading, setLoading] = reactExports.useState(false);
 	  function onClick() {
-	    _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-	      return _regeneratorRuntime().wrap(function _callee$(_context) {
-	        while (1) switch (_context.prev = _context.next) {
-	          case 0:
-	            setLoading(true);
-	            _context.next = 3;
-	            return loader();
-	          case 3:
-	            setLoading(false);
-	          case 4:
-	          case "end":
-	            return _context.stop();
-	        }
-	      }, _callee);
-	    }))();
+	    (async () => {
+	      setLoading(true);
+	      await loader();
+	      setLoading(false);
+	    })();
 	  }
 	  return /*#__PURE__*/React.createElement(Button, _extends({
 	    onClick: onClick,
@@ -34899,23 +34259,20 @@
 	  }, props), loading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BiLoaderAlt, null), "\xA0", loadingText) : children);
 	}
 
-	var _excluded$3 = ["children", "onLoad"];
-	function LoadingSubmitButton(_ref) {
-	  var children = _ref.children,
-	    _ref$onLoad = _ref.onLoad,
-	    onLoad = _ref$onLoad === void 0 ? function (x) {
-	      return x;
-	    } : _ref$onLoad,
-	    props = _objectWithoutProperties(_ref, _excluded$3);
-	  var navigation = useNavigation();
-	  var loadingRef = reactExports.useRef(null);
-	  var loading = navigation.state !== 'idle' && navigation.formData
+	function LoadingSubmitButton({
+	  children,
+	  onLoad = x => x,
+	  ...props
+	}) {
+	  const navigation = useNavigation();
+	  const loadingRef = reactExports.useRef(null);
+	  const loading = navigation.state !== 'idle' && navigation.formData
 	  /* && navigation.formData.get(props.name) === String(props.value) */;
 
 	  if (loading) {
 	    loadingRef.current = true;
 	  }
-	  reactExports.useEffect(function () {
+	  reactExports.useEffect(() => {
 	    if (!loading && loadingRef.current) {
 	      onLoad();
 	      loadingRef.current = null;
@@ -34930,23 +34287,14 @@
 	  }, props), loading ? /*#__PURE__*/React.createElement(BiLoaderAlt, null) : children);
 	}
 
-	var _excluded$2 = ["onLoad", "onClear"];
-	function FileInput(_ref) {
-	  var _ref$onLoad = _ref.onLoad,
-	    onLoad = _ref$onLoad === void 0 ? function (x) {
-	      return x;
-	    } : _ref$onLoad,
-	    _ref$onClear = _ref.onClear,
-	    onClear = _ref$onClear === void 0 ? function (x) {
-	      return x;
-	    } : _ref$onClear,
-	    props = _objectWithoutProperties(_ref, _excluded$2);
-	  var _useState = reactExports.useState(null),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    file = _useState2[0],
-	    setFile = _useState2[1];
-	  var fileInputElement = reactExports.useRef();
-	  reactExports.useEffect(function () {
+	function FileInput({
+	  onLoad = x => x,
+	  onClear = x => x,
+	  ...props
+	}) {
+	  const [file, setFile] = reactExports.useState(null);
+	  const fileInputElement = reactExports.useRef();
+	  reactExports.useEffect(() => {
 	    if (file) {
 	      var fr = new FileReader();
 	      fr.onload = function () {
@@ -34969,7 +34317,7 @@
 	    disabled: true,
 	    width: "medium",
 	    onClick: onClick,
-	    value: (file === null || file === void 0 ? void 0 : file.name) || 'No file selected'
+	    value: file?.name || 'No file selected'
 	  })), /*#__PURE__*/React.createElement(InputGroupInline, null, /*#__PURE__*/React.createElement(Button, _extends({
 	    onClick: onClick
 	  }, props), /*#__PURE__*/React.createElement(FaFolder, null))), /*#__PURE__*/React.createElement("input", {
@@ -34982,576 +34330,225 @@
 	  }));
 	}
 
-	function AddGroupButton(_ref) {
-	  var onClick = _ref.onClick;
+	function AddGroupButton({
+	  onClick
+	}) {
 	  return /*#__PURE__*/React.createElement(Button, {
 	    type: "secondary",
 	    onClick: onClick
 	  }, /*#__PURE__*/React.createElement(BiPlus, null), " Add Section");
 	}
-	function RemoveGroupButton(_ref2) {
-	  var onClick = _ref2.onClick;
+	function RemoveGroupButton({
+	  onClick
+	}) {
 	  return /*#__PURE__*/React.createElement(Button, {
 	    type: "secondary",
 	    error: true,
 	    onClick: onClick
 	  }, "Remove Group");
 	}
-	function ItemList$1(_ref3) {
-	  var items = _ref3.items;
+	function ItemList$1({
+	  items
+	}) {
 	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(InputList, {
 	    list: items,
 	    addButton: AddGroupButton,
 	    removeButton: RemoveGroupButton
-	  }, function (_ref4, RemoveGroupButton) {
-	    var _ref4$name = _ref4.name,
-	      name = _ref4$name === void 0 ? '' : _ref4$name,
-	      _ref4$ingredients = _ref4.ingredients,
-	      ingredients = _ref4$ingredients === void 0 ? [] : _ref4$ingredients,
-	      _ref4$quantities = _ref4.quantities,
-	      quantities = _ref4$quantities === void 0 ? [] : _ref4$quantities;
-	    return /*#__PURE__*/React.createElement(InputGroup, {
-	      basic: true,
-	      bg: true
-	    }, /*#__PURE__*/React.createElement(InputGroup, {
-	      basic: true
-	    }, /*#__PURE__*/React.createElement(TextInput, {
-	      className: "input-text--heading",
-	      width: "medium",
-	      name: "group",
-	      value: name,
-	      placeholder: "Section name"
-	    })), /*#__PURE__*/React.createElement(InputList, {
-	      focusInput: true,
-	      list: ingredients.map(function (_, i) {
-	        return [ingredients[i], quantities[i]];
-	      })
-	    }, function (_ref5, RemoveButton, InsertButton) {
-	      var _ref6 = _slicedToArray(_ref5, 2),
-	        ingredient = _ref6[0],
-	        _ref6$ = _ref6[1],
-	        quantity = _ref6$ === void 0 ? '' : _ref6$;
-	      return /*#__PURE__*/React.createElement(InputGroup, {
-	        basic: true
-	      }, /*#__PURE__*/React.createElement(InputGroupInline, {
-	        style: {
-	          marginBottom: 0
-	        }
-	      }, /*#__PURE__*/React.createElement(IngredientInput, {
-	        ingredientKey: ingredient && ingredient.key,
-	        ingredient: ingredient && ingredient.name
-	      })), /*#__PURE__*/React.createElement(InputGroupInline, {
-	        style: {
-	          marginBottom: 0
-	        }
-	      }, /*#__PURE__*/React.createElement(TextInput, {
-	        className: "input-text--white",
-	        width: "small",
-	        name: "quantities",
-	        placeholder: "Qty",
-	        value: quantity
-	      })), /*#__PURE__*/React.createElement(InputGroupInline, {
-	        style: {
-	          marginBottom: 0
-	        }
-	      }, RemoveButton), /*#__PURE__*/React.createElement(InputGroupInline, {
-	        style: {
-	          marginBottom: 0
-	        }
-	      }, InsertButton));
-	    }), /*#__PURE__*/React.createElement(InputGroup, {
-	      basic: true,
-	      style: {
-	        marginTop: 15,
-	        marginBottom: 7
-	      }
-	    }, RemoveGroupButton));
-	  }), /*#__PURE__*/React.createElement("input", {
+	  }, ({
+	    name = '',
+	    ingredients = [],
+	    quantities = []
+	  }, RemoveGroupButton) => /*#__PURE__*/React.createElement(InputGroup, {
+	    basic: true,
+	    bg: true
+	  }, /*#__PURE__*/React.createElement(InputGroup, {
+	    basic: true
+	  }, /*#__PURE__*/React.createElement(TextInput, {
+	    className: "input-text--heading",
+	    width: "medium",
+	    name: "group",
+	    value: name,
+	    placeholder: "Section name"
+	  })), /*#__PURE__*/React.createElement(InputList, {
+	    focusInput: true,
+	    list: ingredients.map((_, i) => [ingredients[i], quantities[i]])
+	  }, ([ingredient, quantity = ''], RemoveButton, InsertButton) => /*#__PURE__*/React.createElement(InputGroup, {
+	    basic: true
+	  }, /*#__PURE__*/React.createElement(InputGroupInline, {
+	    style: {
+	      marginBottom: 0
+	    }
+	  }, /*#__PURE__*/React.createElement(IngredientInput, {
+	    ingredientKey: ingredient && ingredient.key,
+	    ingredient: ingredient && ingredient.name
+	  })), /*#__PURE__*/React.createElement(InputGroupInline, {
+	    style: {
+	      marginBottom: 0
+	    }
+	  }, /*#__PURE__*/React.createElement(TextInput, {
+	    className: "input-text--white",
+	    width: "small",
+	    name: "quantities",
+	    placeholder: "Qty",
+	    value: quantity
+	  })), /*#__PURE__*/React.createElement(InputGroupInline, {
+	    style: {
+	      marginBottom: 0
+	    }
+	  }, RemoveButton), /*#__PURE__*/React.createElement(InputGroupInline, {
+	    style: {
+	      marginBottom: 0
+	    }
+	  }, InsertButton))), /*#__PURE__*/React.createElement(InputGroup, {
+	    basic: true,
+	    style: {
+	      marginTop: 15,
+	      marginBottom: 7
+	    }
+	  }, RemoveGroupButton))), /*#__PURE__*/React.createElement("input", {
 	    type: "hidden",
 	    name: "groupend",
 	    value: "true"
 	  }));
 	}
 
-	var API_URL = "http://".concat(location.hostname, ":3001");
-	function getRequest(_x) {
-	  return _getRequest.apply(this, arguments);
+	const API_URL = `http://${location.hostname}:3001`;
+	async function getRequest(path) {
+	  const result = await fetch(API_URL + path);
+	  return await result.json();
 	}
-	function _getRequest() {
-	  _getRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(path) {
-	    var result;
-	    return _regeneratorRuntime().wrap(function _callee$(_context) {
-	      while (1) switch (_context.prev = _context.next) {
-	        case 0:
-	          _context.next = 2;
-	          return fetch(API_URL + path);
-	        case 2:
-	          result = _context.sent;
-	          _context.next = 5;
-	          return result.json();
-	        case 5:
-	          return _context.abrupt("return", _context.sent);
-	        case 6:
-	        case "end":
-	          return _context.stop();
-	      }
-	    }, _callee);
-	  }));
-	  return _getRequest.apply(this, arguments);
+	async function postRequest(path, body) {
+	  try {
+	    return await (await fetch(API_URL + path, {
+	      method: 'POST',
+	      headers: {
+	        'Content-Type': 'application/json'
+	      },
+	      body: typeof body === 'object' ? JSON.stringify(body) : body
+	    })).json();
+	  } catch (e) {}
 	}
-	function postRequest(_x2, _x3) {
-	  return _postRequest.apply(this, arguments);
+	async function putRequest(path, body) {
+	  await fetch(API_URL + path, {
+	    method: 'PUT',
+	    headers: {
+	      'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify(body)
+	  });
 	}
-	function _postRequest() {
-	  _postRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(path, body) {
-	    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-	      while (1) switch (_context2.prev = _context2.next) {
-	        case 0:
-	          _context2.prev = 0;
-	          _context2.next = 3;
-	          return fetch(API_URL + path, {
-	            method: 'POST',
-	            headers: {
-	              'Content-Type': 'application/json'
-	            },
-	            body: _typeof(body) === 'object' ? JSON.stringify(body) : body
-	          });
-	        case 3:
-	          _context2.next = 5;
-	          return _context2.sent.json();
-	        case 5:
-	          return _context2.abrupt("return", _context2.sent);
-	        case 8:
-	          _context2.prev = 8;
-	          _context2.t0 = _context2["catch"](0);
-	        case 10:
-	        case "end":
-	          return _context2.stop();
-	      }
-	    }, _callee2, null, [[0, 8]]);
-	  }));
-	  return _postRequest.apply(this, arguments);
-	}
-	function putRequest(_x4, _x5) {
-	  return _putRequest.apply(this, arguments);
-	}
-	function _putRequest() {
-	  _putRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(path, body) {
-	    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-	      while (1) switch (_context3.prev = _context3.next) {
-	        case 0:
-	          _context3.next = 2;
-	          return fetch(API_URL + path, {
-	            method: 'PUT',
-	            headers: {
-	              'Content-Type': 'application/json'
-	            },
-	            body: JSON.stringify(body)
-	          });
-	        case 2:
-	        case "end":
-	          return _context3.stop();
-	      }
-	    }, _callee3);
-	  }));
-	  return _putRequest.apply(this, arguments);
-	}
-	function deleteRequest(_x6) {
-	  return _deleteRequest.apply(this, arguments);
-	}
-	function _deleteRequest() {
-	  _deleteRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(path) {
-	    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-	      while (1) switch (_context4.prev = _context4.next) {
-	        case 0:
-	          _context4.next = 2;
-	          return fetch(API_URL + path, {
-	            method: 'DELETE'
-	          });
-	        case 2:
-	        case "end":
-	          return _context4.stop();
-	      }
-	    }, _callee4);
-	  }));
-	  return _deleteRequest.apply(this, arguments);
+	async function deleteRequest(path) {
+	  await fetch(API_URL + path, {
+	    method: 'DELETE'
+	  });
 	}
 
-	var ItemSet = /*#__PURE__*/function () {
-	  function ItemSet(resourceName) {
-	    _classCallCheck(this, ItemSet);
-	    _defineProperty(this, "data", {});
-	    _defineProperty(this, "resourceName", void 0);
-	    _defineProperty(this, "initDone", false);
+	class ItemSet {
+	  data = {};
+	  initDone = false;
+	  constructor(resourceName) {
 	    this.resourceName = resourceName;
 	  }
-	  _createClass(ItemSet, [{
-	    key: "init",
-	    value: function () {
-	      var _init = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-	        return _regeneratorRuntime().wrap(function _callee$(_context) {
-	          while (1) switch (_context.prev = _context.next) {
-	            case 0:
-	              if (this.initDone) {
-	                _context.next = 4;
-	                break;
-	              }
-	              this.initDone = true;
-	              _context.next = 4;
-	              return this.refresh();
-	            case 4:
-	            case "end":
-	              return _context.stop();
-	          }
-	        }, _callee, this);
-	      }));
-	      function init() {
-	        return _init.apply(this, arguments);
-	      }
-	      return init;
-	    }()
-	  }, {
-	    key: "refresh",
-	    value: function () {
-	      var _refresh = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-	        var results, _iterator, _step, result;
-	        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-	          while (1) switch (_context2.prev = _context2.next) {
-	            case 0:
-	              _context2.next = 2;
-	              return getRequest("/".concat(this.resourceName));
-	            case 2:
-	              results = _context2.sent;
-	              _iterator = _createForOfIteratorHelper(results);
-	              try {
-	                for (_iterator.s(); !(_step = _iterator.n()).done;) {
-	                  result = _step.value;
-	                  this.data[result.id] = {
-	                    name: result.name,
-	                    usage: result.usage
-	                  };
-	                }
-	              } catch (err) {
-	                _iterator.e(err);
-	              } finally {
-	                _iterator.f();
-	              }
-	            case 5:
-	            case "end":
-	              return _context2.stop();
-	          }
-	        }, _callee2, this);
-	      }));
-	      function refresh() {
-	        return _refresh.apply(this, arguments);
-	      }
-	      return refresh;
-	    }()
-	  }, {
-	    key: "add",
-	    value: function () {
-	      var _add = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(name) {
-	        var _yield$postRequest, id, record;
-	        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-	          while (1) switch (_context3.prev = _context3.next) {
-	            case 0:
-	              _context3.next = 2;
-	              return this.init();
-	            case 2:
-	              _context3.next = 4;
-	              return postRequest("/".concat(this.resourceName), {
-	                name: name
-	              });
-	            case 4:
-	              _yield$postRequest = _context3.sent;
-	              id = _yield$postRequest.id;
-	              record = {
-	                name: name,
-	                usage: 0
-	              };
-	              this.data[id] = record;
-	              return _context3.abrupt("return", id);
-	            case 9:
-	            case "end":
-	              return _context3.stop();
-	          }
-	        }, _callee3, this);
-	      }));
-	      function add(_x) {
-	        return _add.apply(this, arguments);
-	      }
-	      return add;
-	    }()
-	  }, {
-	    key: "get",
-	    value: function () {
-	      var _get = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(key) {
-	        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-	          while (1) switch (_context4.prev = _context4.next) {
-	            case 0:
-	              _context4.next = 2;
-	              return this.init();
-	            case 2:
-	              return _context4.abrupt("return", this.data[key]);
-	            case 3:
-	            case "end":
-	              return _context4.stop();
-	          }
-	        }, _callee4, this);
-	      }));
-	      function get(_x2) {
-	        return _get.apply(this, arguments);
-	      }
-	      return get;
-	    }()
-	  }, {
-	    key: "getForUpdate",
-	    value: function () {
-	      var _getForUpdate = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(key) {
-	        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-	          while (1) switch (_context5.prev = _context5.next) {
-	            case 0:
-	              _context5.next = 2;
-	              return this.init();
-	            case 2:
-	              return _context5.abrupt("return", {
-	                key: key,
-	                name: this.data[key].name
-	              });
-	            case 3:
-	            case "end":
-	              return _context5.stop();
-	          }
-	        }, _callee5, this);
-	      }));
-	      function getForUpdate(_x3) {
-	        return _getForUpdate.apply(this, arguments);
-	      }
-	      return getForUpdate;
-	    }()
-	  }, {
-	    key: "getAll",
-	    value: function () {
-	      var _getAll = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
-	        var data, _i, _Object$entries, _Object$entries$_i, key, value;
-	        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-	          while (1) switch (_context6.prev = _context6.next) {
-	            case 0:
-	              _context6.next = 2;
-	              return this.init();
-	            case 2:
-	              data = [];
-	              for (_i = 0, _Object$entries = Object.entries(this.data); _i < _Object$entries.length; _i++) {
-	                _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), key = _Object$entries$_i[0], value = _Object$entries$_i[1];
-	                data.push([key, value]);
-	              }
-	              return _context6.abrupt("return", data);
-	            case 5:
-	            case "end":
-	              return _context6.stop();
-	          }
-	        }, _callee6, this);
-	      }));
-	      function getAll() {
-	        return _getAll.apply(this, arguments);
-	      }
-	      return getAll;
-	    }()
-	  }, {
-	    key: "getAllForUpdate",
-	    value: function () {
-	      var _getAllForUpdate = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-	        var data, _i2, _Object$entries2, _Object$entries2$_i, key, value;
-	        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-	          while (1) switch (_context7.prev = _context7.next) {
-	            case 0:
-	              _context7.next = 2;
-	              return this.init();
-	            case 2:
-	              data = [];
-	              for (_i2 = 0, _Object$entries2 = Object.entries(this.data); _i2 < _Object$entries2.length; _i2++) {
-	                _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2), key = _Object$entries2$_i[0], value = _Object$entries2$_i[1];
-	                data.push({
-	                  key: key,
-	                  name: value.name
-	                });
-	              }
-	              return _context7.abrupt("return", data);
-	            case 5:
-	            case "end":
-	              return _context7.stop();
-	          }
-	        }, _callee7, this);
-	      }));
-	      function getAllForUpdate() {
-	        return _getAllForUpdate.apply(this, arguments);
-	      }
-	      return getAllForUpdate;
-	    }()
-	  }, {
-	    key: "remove",
-	    value: function () {
-	      var _remove = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(key) {
-	        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-	          while (1) switch (_context8.prev = _context8.next) {
-	            case 0:
-	              _context8.next = 2;
-	              return this.init();
-	            case 2:
-	              _context8.next = 4;
-	              return deleteRequest("/".concat(this.resourceName, "/").concat(key));
-	            case 4:
-	              delete this.data[key];
-	            case 5:
-	            case "end":
-	              return _context8.stop();
-	          }
-	        }, _callee8, this);
-	      }));
-	      function remove(_x4) {
-	        return _remove.apply(this, arguments);
-	      }
-	      return remove;
-	    }()
-	  }, {
-	    key: "update",
-	    value: function () {
-	      var _update = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(key, newName) {
-	        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-	          while (1) switch (_context9.prev = _context9.next) {
-	            case 0:
-	              _context9.next = 2;
-	              return this.init();
-	            case 2:
-	              _context9.next = 4;
-	              return putRequest("/".concat(this.resourceName, "/").concat(key), {
-	                name: newName
-	              });
-	            case 4:
-	              this.data[key].name = newName;
-	            case 5:
-	            case "end":
-	              return _context9.stop();
-	          }
-	        }, _callee9, this);
-	      }));
-	      function update(_x5, _x6) {
-	        return _update.apply(this, arguments);
-	      }
-	      return update;
-	    }()
-	  }, {
-	    key: "use",
-	    value: function () {
-	      var _use = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(key) {
-	        return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-	          while (1) switch (_context10.prev = _context10.next) {
-	            case 0:
-	              _context10.next = 2;
-	              return this.init();
-	            case 2:
-	              this.data[key].usage++;
-	            case 3:
-	            case "end":
-	              return _context10.stop();
-	          }
-	        }, _callee10, this);
-	      }));
-	      function use(_x7) {
-	        return _use.apply(this, arguments);
-	      }
-	      return use;
-	    }()
-	  }, {
-	    key: "unUse",
-	    value: function () {
-	      var _unUse = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(key) {
-	        return _regeneratorRuntime().wrap(function _callee11$(_context11) {
-	          while (1) switch (_context11.prev = _context11.next) {
-	            case 0:
-	              _context11.next = 2;
-	              return this.init();
-	            case 2:
-	              this.data[key].usage--;
-	            case 3:
-	            case "end":
-	              return _context11.stop();
-	          }
-	        }, _callee11, this);
-	      }));
-	      function unUse(_x8) {
-	        return _unUse.apply(this, arguments);
-	      }
-	      return unUse;
-	    }()
-	  }, {
-	    key: "isInUse",
-	    value: function () {
-	      var _isInUse = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12(key) {
-	        return _regeneratorRuntime().wrap(function _callee12$(_context12) {
-	          while (1) switch (_context12.prev = _context12.next) {
-	            case 0:
-	              _context12.next = 2;
-	              return this.init();
-	            case 2:
-	              return _context12.abrupt("return", this.data[key].usage !== 0);
-	            case 3:
-	            case "end":
-	              return _context12.stop();
-	          }
-	        }, _callee12, this);
-	      }));
-	      function isInUse(_x9) {
-	        return _isInUse.apply(this, arguments);
-	      }
-	      return isInUse;
-	    }()
-	  }, {
-	    key: "deleteAll",
-	    value: function () {
-	      var _deleteAll = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
-	        return _regeneratorRuntime().wrap(function _callee13$(_context13) {
-	          while (1) switch (_context13.prev = _context13.next) {
-	            case 0:
-	              _context13.next = 2;
-	              return deleteRequest("/".concat(this.resourceName));
-	            case 2:
-	              this.data = {};
-	            case 3:
-	            case "end":
-	              return _context13.stop();
-	          }
-	        }, _callee13, this);
-	      }));
-	      function deleteAll() {
-	        return _deleteAll.apply(this, arguments);
-	      }
-	      return deleteAll;
-	    }()
-	  }]);
-	  return ItemSet;
-	}();
+	  async init() {
+	    if (!this.initDone) {
+	      this.initDone = true;
+	      await this.refresh();
+	    }
+	  }
+	  async refresh() {
+	    const results = await getRequest(`/${this.resourceName}`);
+	    for (var result of results) {
+	      this.data[result.id] = {
+	        name: result.name,
+	        usage: result.usage
+	      };
+	    }
+	  }
+	  async add(name) {
+	    await this.init();
+	    const {
+	      id
+	    } = await postRequest(`/${this.resourceName}`, {
+	      name
+	    });
+	    var record = {
+	      name,
+	      usage: 0
+	    };
+	    this.data[id] = record;
+	    return id;
+	  }
+	  async get(key) {
+	    await this.init();
+	    return this.data[key];
+	  }
+	  async getForUpdate(key) {
+	    await this.init();
+	    return {
+	      key,
+	      name: this.data[key].name
+	    };
+	  }
+	  async getAll() {
+	    await this.init();
+	    var data = [];
+	    for (var [key, value] of Object.entries(this.data)) {
+	      data.push([key, value]);
+	    }
+	    return data;
+	  }
+	  async getAllForUpdate() {
+	    await this.init();
+	    var data = [];
+	    for (var [key, value] of Object.entries(this.data)) {
+	      data.push({
+	        key,
+	        name: value.name
+	      });
+	    }
+	    return data;
+	  }
+	  async remove(key) {
+	    await this.init();
+	    await deleteRequest(`/${this.resourceName}/${key}`);
+	    delete this.data[key];
+	  }
+	  async update(key, newName) {
+	    await this.init();
+	    await putRequest(`/${this.resourceName}/${key}`, {
+	      name: newName
+	    });
+	    this.data[key].name = newName;
+	  }
+	  async use(key) {
+	    await this.init();
+	    this.data[key].usage++;
+	  }
+	  async unUse(key) {
+	    await this.init();
+	    this.data[key].usage--;
+	  }
+	  async isInUse(key) {
+	    await this.init();
+	    return this.data[key].usage !== 0;
+	  }
+	  async deleteAll() {
+	    await deleteRequest(`/${this.resourceName}`);
+	    this.data = {};
+	  }
+	}
 
 	function deepClone(obj) {
 	  // If obj is a primitive, just return it.
-	  if (_typeof(obj) !== 'object' || obj === null) {
+	  if (typeof obj !== 'object' || obj === null) {
 	    return obj;
 	  }
 
 	  // If obj is an array, deal with it specially.
 	  if (obj instanceof Array) {
 	    var clone = [];
-	    var _iterator = _createForOfIteratorHelper(obj),
-	      _step;
-	    try {
-	      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-	        var item = _step.value;
-	        clone.push(deepClone(item));
-	      }
-	    } catch (err) {
-	      _iterator.e(err);
-	    } finally {
-	      _iterator.f();
+	    for (var item of obj) {
+	      clone.push(deepClone(item));
 	    }
 	    return clone;
 	  }
@@ -35960,14 +34957,14 @@
 	  }
 	}
 
-	var recipeList = new RecipeList();
-	var categorySet = new ItemSet('categories');
-	var ingredientSet = new ItemSet('ingredients');
+	const recipeList = new RecipeList();
+	const categorySet = new ItemSet('categories');
+	const ingredientSet = new ItemSet('ingredients');
 
-	var _excluded$1 = ["category"];
-	function CategoryInput(_ref) {
-	  var category = _ref.category,
-	    props = _objectWithoutProperties(_ref, _excluded$1);
+	function CategoryInput({
+	  category,
+	  ...props
+	}) {
 	  return /*#__PURE__*/React.createElement(AutocompleteInput, _extends({
 	    className: "input-text",
 	    name: "category",
@@ -35976,29 +34973,19 @@
 	    placeholder: "Category",
 	    allOnEmpty: true,
 	    data: categorySet.getAllForUpdate(),
-	    filterFunction: function filterFunction(value, entry) {
-	      return entry.name.indexOf(value) !== -1;
-	    },
-	    getSuggestionValue: function getSuggestionValue(entry) {
-	      return entry.name;
-	    },
-	    getInputValue: function getInputValue(entry) {
-	      return entry.name;
-	    },
-	    noMatchText: function noMatchText(value) {
-	      return "Category '".concat(value, "' will be added");
-	    },
-	    getHiddenInputValue: function getHiddenInputValue(entry) {
-	      return entry.key;
-	    }
+	    filterFunction: (value, entry) => entry.name.indexOf(value) !== -1,
+	    getSuggestionValue: entry => entry.name,
+	    getInputValue: entry => entry.name,
+	    noMatchText: value => `Category '${value}' will be added`,
+	    getHiddenInputValue: entry => entry.key
 	  }, props));
 	}
 
-	var _excluded = ["ingredientKey", "ingredient"];
-	function IngredientInput(_ref) {
-	  var ingredientKey = _ref.ingredientKey,
-	    ingredient = _ref.ingredient,
-	    props = _objectWithoutProperties(_ref, _excluded);
+	function IngredientInput({
+	  ingredientKey,
+	  ingredient,
+	  ...props
+	}) {
 	  return /*#__PURE__*/React.createElement(AutocompleteInput, _extends({
 	    className: "input-text input-text--white",
 	    name: "ingredients",
@@ -36007,34 +34994,22 @@
 	    allOnEmpty: true,
 	    placeholder: "Ingredient",
 	    data: ingredientSet.getAll(),
-	    filterFunction: function filterFunction(value, entry) {
-	      return entry[1].name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-	    },
-	    getSuggestionValue: function getSuggestionValue(entry) {
-	      return entry[1].name;
-	    },
-	    getInputValue: function getInputValue(entry) {
-	      return entry[1].name;
-	    },
-	    noMatchText: function noMatchText(value) {
-	      return "Ingredient '".concat(value, "' will be added");
-	    },
-	    getHiddenInputValue: function getHiddenInputValue(entry) {
-	      return entry[0];
-	    }
+	    filterFunction: (value, entry) => entry[1].name.toLowerCase().indexOf(value.toLowerCase()) !== -1,
+	    getSuggestionValue: entry => entry[1].name,
+	    getInputValue: entry => entry[1].name,
+	    noMatchText: value => `Ingredient '${value}' will be added`,
+	    getHiddenInputValue: entry => entry[0]
 	  }, props));
 	}
 
-	function Header(_ref) {
-	  var setClassApplied = _ref.setClassApplied;
-	  var _useOverlayFunctions = useOverlayFunctions(function () {
-	      setClassApplied(true);
-	    }, function () {
-	      setClassApplied(false);
-	    }, 850),
-	    _useOverlayFunctions2 = _slicedToArray(_useOverlayFunctions, 2),
-	    showOverlay = _useOverlayFunctions2[0];
-	    _useOverlayFunctions2[1];
+	function Header({
+	  setClassApplied
+	}) {
+	  const [showOverlay, hideOverlay] = useOverlayFunctions(() => {
+	    setClassApplied(true);
+	  }, () => {
+	    setClassApplied(false);
+	  }, 850);
 	  function onClick() {
 	    showOverlay();
 	  }
@@ -36049,10 +35024,11 @@
 	  }, /*#__PURE__*/React.createElement(FaBars, null)));
 	}
 
-	function SideBarLink(_ref) {
-	  var href = _ref.href,
-	    children = _ref.children;
-	  var _href = useHref();
+	function SideBarLink({
+	  href,
+	  children
+	}) {
+	  const _href = useHref();
 	  return /*#__PURE__*/React.createElement("li", {
 	    className: classNames({
 	      'sidebar_entry': true,
@@ -36062,12 +35038,11 @@
 	    to: href
 	  }, children));
 	}
-	function SideBar(_ref2) {
-	  var classApplied = _ref2.classApplied;
-	  var _useSearchParams = useSearchParams(),
-	    _useSearchParams2 = _slicedToArray(_useSearchParams, 1),
-	    searchParams = _useSearchParams2[0];
-	  var query = searchParams.get('q') || '';
+	function SideBar({
+	  classApplied
+	}) {
+	  const [searchParams] = useSearchParams();
+	  const query = searchParams.get('q') || '';
 	  return /*#__PURE__*/React.createElement("section", {
 	    className: classNames({
 	      'sidebar': true,
@@ -36104,16 +35079,14 @@
 
 	var setModal = null;
 	function useModal() {
-	  var _useOverlayFunctions = useOverlayFunctions(function () {}, hideModal),
-	    _useOverlayFunctions2 = _slicedToArray(_useOverlayFunctions, 2),
-	    showOverlay = _useOverlayFunctions2[0],
-	    hideOverlay = _useOverlayFunctions2[1];
-	  function showModal(_ref) {
-	    var title = _ref.title,
-	      body = _ref.body;
+	  const [showOverlay, hideOverlay] = useOverlayFunctions(() => {}, hideModal);
+	  function showModal({
+	    title,
+	    body
+	  }) {
 	    setModal({
-	      title: title,
-	      body: body
+	      title,
+	      body
 	    });
 	    showOverlay();
 	  }
@@ -36121,30 +35094,32 @@
 	    setModal(null);
 	  }
 	  return {
-	    showModal: showModal,
+	    showModal,
 	    // When a piece of code wants to hide the modal, it actually hides the 
 	    // overlay, which in this case is configured to automatically hide the 
 	    // modal as well. Think out of the box!
 	    hideModal: hideOverlay
 	  };
 	}
-	function ModalBox(_ref2) {
-	  var content = _ref2.content;
-	  var _useModal = useModal(),
-	    hideModal = _useModal.hideModal;
-	  var keyDownHandler = reactExports.useCallback(function (e) {
+	function ModalBox({
+	  content
+	}) {
+	  const {
+	    hideModal
+	  } = useModal();
+	  const keyDownHandler = reactExports.useCallback(e => {
 	    if (e.keyCode === 27) {
 	      hideModal();
 	    }
 	  }, []);
-	  var modalDivElement = reactExports.useRef();
-	  reactExports.useEffect(function () {
+	  const modalDivElement = reactExports.useRef();
+	  reactExports.useEffect(() => {
 	    window.addEventListener('keydown', keyDownHandler);
-	    return function () {
+	    return () => {
 	      window.removeEventListener('keydown', keyDownHandler);
 	    };
 	  }, []);
-	  reactExports.useEffect(function () {
+	  reactExports.useEffect(() => {
 	    var inputElement = modalDivElement.current.querySelector('input[type="text"]');
 	    if (inputElement) {
 	      inputElement.focus();
@@ -36158,11 +35133,8 @@
 	  }, content.title), content.body);
 	}
 	function Modal() {
-	  var _useState = reactExports.useState(null),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    modal = _useState2[0],
-	    _setModal = _useState2[1];
-	  reactExports.useEffect(function () {
+	  const [modal, _setModal] = reactExports.useState(null);
+	  reactExports.useEffect(() => {
 	    setModal = _setModal;
 	  }, []);
 	  return modal ? /*#__PURE__*/React.createElement(ModalBox, {
@@ -36179,22 +35151,16 @@
 	  };
 	}
 	function Alert() {
-	  var _useState = reactExports.useState(null),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    alertMessage = _useState2[0],
-	    _setAlertMessage = _useState2[1];
-	  var _useState3 = reactExports.useState(false),
-	    _useState4 = _slicedToArray(_useState3, 2),
-	    alertShown = _useState4[0],
-	    _setAlertShown = _useState4[1];
-	  var timeoutRef = reactExports.useRef();
-	  reactExports.useEffect(function () {
+	  const [alertMessage, _setAlertMessage] = reactExports.useState(null);
+	  const [alertShown, _setAlertShown] = reactExports.useState(false);
+	  const timeoutRef = reactExports.useRef();
+	  reactExports.useEffect(() => {
 	    setAlertShown = _setAlertShown;
 	    setAlertMessage = _setAlertMessage;
 	  }, []);
-	  reactExports.useEffect(function () {
+	  reactExports.useEffect(() => {
 	    clearTimeout(timeoutRef.current);
-	    timeoutRef.current = setTimeout(function () {
+	    timeoutRef.current = setTimeout(() => {
 	      _setAlertShown(false);
 	    }, 3000);
 	  });
@@ -36206,14 +35172,12 @@
 	  }, alertMessage);
 	}
 
-	function Root(_ref) {
-	  var element = _ref.element;
-	  var _useState = reactExports.useState(false),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    classApplied = _useState2[0],
-	    setClassApplied = _useState2[1];
-	  var navigation = useNavigation();
-	  var isLoading = navigation.state !== 'idle';
+	function Root({
+	  element
+	}) {
+	  const [classApplied, setClassApplied] = reactExports.useState(false);
+	  const navigation = useNavigation();
+	  const isLoading = navigation.state !== 'idle';
 	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Overlay, null), /*#__PURE__*/React.createElement(Modal, null), /*#__PURE__*/React.createElement(Alert, null), /*#__PURE__*/React.createElement(Header, {
 	    setClassApplied: setClassApplied
 	  }), /*#__PURE__*/React.createElement(SideBar, {
@@ -36238,31 +35202,33 @@
 	  });
 	}
 
-	function Rating(_ref) {
-	  var rating = _ref.rating;
-	  return new Array(5).fill().map(function (_, i) {
-	    return /*#__PURE__*/React.createElement(FaStar, {
-	      key: i,
-	      className: classNames({
-	        'star': true,
-	        'star--sel': i < rating
-	      })
-	    });
-	  });
+	function Rating({
+	  rating
+	}) {
+	  return new Array(5).fill().map((_, i) => /*#__PURE__*/React.createElement(FaStar, {
+	    key: i,
+	    className: classNames({
+	      'star': true,
+	      'star--sel': i < rating
+	    })
+	  }));
 	}
 
-	function RecipeCard(_ref) {
-	  var data = _ref.data;
-	  var id = data.id,
-	    dateCreated = data.dateCreated,
-	    name = data.name,
-	    rating = data.rating,
-	    category = data.category;
+	function RecipeCard({
+	  data
+	}) {
+	  const {
+	    id,
+	    dateCreated,
+	    name,
+	    rating,
+	    category
+	  } = data;
 	  return /*#__PURE__*/React.createElement("div", {
 	    className: "recipe-card-wrapper"
 	  }, /*#__PURE__*/React.createElement(Link, {
 	    className: "recipe-card",
-	    to: "/recipe/".concat(id)
+	    to: `/recipe/${id}`
 	  }, /*#__PURE__*/React.createElement("h4", {
 	    className: "recipe-card_category"
 	  }, category), /*#__PURE__*/React.createElement("div", {
@@ -36274,9 +35240,10 @@
 	  }, dateCreated.toDateString()), /*#__PURE__*/React.createElement("h2", null, name)));
 	}
 
-	function Recipes(_ref) {
-	  var list = _ref.list;
-	  return /*#__PURE__*/React.createElement(React.Fragment, null, list.map(function (record) {
+	function Recipes({
+	  list
+	}) {
+	  return /*#__PURE__*/React.createElement(React.Fragment, null, list.map(record => {
 	    return /*#__PURE__*/React.createElement(RecipeCard, {
 	      key: record.id,
 	      data: record
@@ -36287,8 +35254,9 @@
 	    }
 	  }));
 	}
-	function RecipeCardList(_ref2) {
-	  var list = _ref2.list;
+	function RecipeCardList({
+	  list
+	}) {
 	  console.log(list);
 	  return /*#__PURE__*/React.createElement("div", {
 	    className: "recipe-cards"
@@ -36298,7 +35266,7 @@
 	}
 
 	function Home() {
-	  var recipes = useLoaderData();
+	  const recipes = useLoaderData();
 	  return recipes.length ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Home ", /*#__PURE__*/React.createElement("span", {
 	    className: "light"
 	  }, "(", recipes && recipes.length, ")")), /*#__PURE__*/React.createElement(RecipeCardList, {
@@ -36322,25 +35290,26 @@
 	      return '';
 	  }
 	}
-	function IngredientsGroup(_ref) {
-	  var name = _ref.name,
-	    ingredients = _ref.ingredients,
-	    quantities = _ref.quantities;
-	  return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("h4", null, name), /*#__PURE__*/React.createElement("ol", null, ingredients.map(function (_, i) {
-	    return /*#__PURE__*/React.createElement("li", {
-	      key: i,
-	      className: classNames(_defineProperty({
-	        'ingredient': true
-	      }, "ingredient--".concat(ingredients[i].status), ingredients[i].status))
-	    }, /*#__PURE__*/React.createElement("div", {
-	      className: "icon"
-	    }, getIcon(ingredients[i].status)), ingredients[i].name, " - ", quantities[i]);
-	  })));
+	function IngredientsGroup({
+	  name,
+	  ingredients,
+	  quantities
+	}) {
+	  return /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("h4", null, name), /*#__PURE__*/React.createElement("ol", null, ingredients.map((_, i) => /*#__PURE__*/React.createElement("li", {
+	    key: i,
+	    className: classNames({
+	      'ingredient': true,
+	      [`ingredient--${ingredients[i].status}`]: ingredients[i].status
+	    })
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "icon"
+	  }, getIcon(ingredients[i].status)), ingredients[i].name, " - ", quantities[i]))));
 	}
 	function DeleteRecipeForm() {
-	  var _useModal = useModal(),
-	    hideModal = _useModal.hideModal;
-	  var href = useHref();
+	  const {
+	    hideModal
+	  } = useModal();
+	  const href = useHref();
 	  return /*#__PURE__*/React.createElement(Form, {
 	    action: href + '/delete'
 	  }, /*#__PURE__*/React.createElement("p", null, "Are you sure you want to delete this recipe?"), /*#__PURE__*/React.createElement(InputGroup, {
@@ -36350,30 +35319,31 @@
 	  }, /*#__PURE__*/React.createElement(Button, {
 	    type: "secondary",
 	    error: true,
-	    onClick: function onClick() {
+	    onClick: () => {
 	      hideModal();
 	    }
 	  }, "Cancel"), "\xA0\xA0", /*#__PURE__*/React.createElement(LoadingSubmitButton, {
 	    submit: true,
-	    onLoad: function onLoad() {
+	    onLoad: () => {
 	      hideModal();
 	    }
 	  }, "Delete")));
 	}
-	function Recipe(_ref2) {
-	  _objectDestructuringEmpty(_ref2);
-	  var _useLoaderData = useLoaderData();
-	    _useLoaderData.id;
-	    var name = _useLoaderData.name,
-	    category = _useLoaderData.category,
-	    rating = _useLoaderData.rating,
-	    items = _useLoaderData.items,
-	    instructions = _useLoaderData.instructions,
-	    review = _useLoaderData.review,
-	    dateCreated = _useLoaderData.dateCreated,
-	    iterations = _useLoaderData.iterations;
-	  var _useModal2 = useModal(),
-	    showModal = _useModal2.showModal;
+	function Recipe({}) {
+	  const {
+	    id,
+	    name,
+	    category,
+	    rating,
+	    items,
+	    instructions,
+	    review,
+	    dateCreated,
+	    iterations
+	  } = useLoaderData();
+	  const {
+	    showModal
+	  } = useModal();
 	  function onDelete() {
 	    showModal({
 	      title: 'Delete Recipe',
@@ -36434,11 +35404,9 @@
 	    className: "recipe_group"
 	  }, /*#__PURE__*/React.createElement("div", {
 	    className: "recipe_label"
-	  }, "Ingredients"), /*#__PURE__*/React.createElement("ol", null, items.map(function (item, i) {
-	    return /*#__PURE__*/React.createElement(IngredientsGroup, _extends({
-	      key: i
-	    }, item));
-	  }))), /*#__PURE__*/React.createElement("div", {
+	  }, "Ingredients"), /*#__PURE__*/React.createElement("ol", null, items.map((item, i) => /*#__PURE__*/React.createElement(IngredientsGroup, _extends({
+	    key: i
+	  }, item))))), /*#__PURE__*/React.createElement("div", {
 	    className: "recipe_group"
 	  }, /*#__PURE__*/React.createElement("div", {
 	    className: "recipe_label"
@@ -36449,9 +35417,10 @@
 	  }, "Review"), /*#__PURE__*/React.createElement("p", null, review || '-')));
 	}
 
-	function RecipeForm(_ref) {
-	  var action = _ref.action,
-	    data = _ref.data;
+	function RecipeForm({
+	  action,
+	  data
+	}) {
 	  var isAddForm = false;
 	  if (!data) {
 	    isAddForm = true;
@@ -36459,7 +35428,7 @@
 	      name: '',
 	      category: '',
 	      rating: 0,
-	      "yield": '',
+	      yield: '',
 	      items: [],
 	      instructions: '',
 	      review: ''
@@ -36490,7 +35459,7 @@
 	    label: "Yield"
 	  }, /*#__PURE__*/React.createElement(TextInput, {
 	    name: "yield",
-	    value: data["yield"],
+	    value: data.yield,
 	    width: "medium"
 	  }))), /*#__PURE__*/React.createElement(InputGroup, {
 	    label: "Ingredients"
@@ -36513,7 +35482,7 @@
 	}
 
 	function UpdateRecipeView() {
-	  var recipe = useLoaderData();
+	  const recipe = useLoaderData();
 	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Update Recipe"), /*#__PURE__*/React.createElement(RecipeForm, {
 	    data: recipe
 	  }));
@@ -36525,13 +35494,15 @@
 	  }));
 	}
 
-	function ItemForm(_ref) {
-	  var buttonValue = _ref.buttonValue,
-	    name = _ref.name,
-	    itemKey = _ref.itemKey;
-	  var _useModal = useModal(),
-	    hideModal = _useModal.hideModal;
-	  var href = useHref();
+	function ItemForm({
+	  buttonValue,
+	  name,
+	  itemKey
+	}) {
+	  const {
+	    hideModal
+	  } = useModal();
+	  const href = useHref();
 	  return /*#__PURE__*/React.createElement(Form, {
 	    method: "post",
 	    action: href
@@ -36550,47 +35521,48 @@
 	  }, /*#__PURE__*/React.createElement(Button, {
 	    type: "secondary",
 	    error: true,
-	    onClick: function onClick() {
+	    onClick: () => {
 	      hideModal();
 	    }
 	  }, "Cancel"), "\xA0\xA0", /*#__PURE__*/React.createElement(LoadingSubmitButton, {
 	    submit: true,
 	    value: itemKey,
 	    name: buttonValue.toLowerCase(),
-	    onLoad: function onLoad() {/* hideModal() */}
+	    onLoad: () => {/* hideModal() */}
 	  }, buttonValue)));
 	}
-	function ItemTableRow(_ref2) {
-	  var item = _ref2.item;
-	  var _useModal2 = useModal(),
-	    showModal = _useModal2.showModal;
-	  var showAlert = useAlert();
-	  var _item = _slicedToArray(item, 2),
-	    itemKey = _item[0],
-	    _item$ = _item[1],
-	    name = _item$.name,
-	    usage = _item$.usage;
+	function ItemTableRow({
+	  item
+	}) {
+	  const {
+	    showModal
+	  } = useModal();
+	  const showAlert = useAlert();
+	  const [itemKey, {
+	    name,
+	    usage
+	  }] = item;
 	  function onUpdateClick() {
 	    showModal({
 	      title: 'Updating item',
 	      body: /*#__PURE__*/React.createElement(ItemForm, {
 	        buttonValue: "Update",
-	        name: name,
-	        itemKey: itemKey
+	        name,
+	        itemKey
 	      })
 	    });
 	  }
 	  function onRemoveClick() {
 	    if (usage !== 0) {
-	      showAlert("'".concat(name, "' is still in use in some recipes. Hence, it can't be deleted."));
+	      showAlert(`'${name}' is still in use in some recipes. Hence, it can't be deleted.`);
 	      return;
 	    }
 	    showModal({
 	      title: 'Remove item?',
 	      body: /*#__PURE__*/React.createElement(ItemForm, {
 	        buttonValue: "Delete",
-	        name: name,
-	        itemKey: itemKey
+	        name,
+	        itemKey
 	      })
 	    });
 	  }
@@ -36609,21 +35581,21 @@
 	    onClick: onRemoveClick
 	  }, /*#__PURE__*/React.createElement(BiTrash, null), " ", /*#__PURE__*/React.createElement("span", null, "Delete"))));
 	}
-	function ItemTable(_ref3) {
-	  var entries = _ref3.entries;
+	function ItemTable({
+	  entries
+	}) {
 	  return /*#__PURE__*/React.createElement("table", {
 	    className: "table"
-	  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Item name"), /*#__PURE__*/React.createElement("th", null, "Usage"), /*#__PURE__*/React.createElement("th", null, "Actions"))), /*#__PURE__*/React.createElement("tbody", null, entries.map(function (entry) {
-	    return /*#__PURE__*/React.createElement(ItemTableRow, {
-	      key: entry[0],
-	      item: entry
-	    });
-	  })));
+	  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Item name"), /*#__PURE__*/React.createElement("th", null, "Usage"), /*#__PURE__*/React.createElement("th", null, "Actions"))), /*#__PURE__*/React.createElement("tbody", null, entries.map(entry => /*#__PURE__*/React.createElement(ItemTableRow, {
+	    key: entry[0],
+	    item: entry
+	  }))));
 	}
 	function AddItemForm() {
-	  var _useModal3 = useModal(),
-	    hideModal = _useModal3.hideModal;
-	  var href = useHref();
+	  const {
+	    hideModal
+	  } = useModal();
+	  const href = useHref();
 	  return /*#__PURE__*/React.createElement(Form, {
 	    method: "post",
 	    action: href
@@ -36641,23 +35613,25 @@
 	  }, /*#__PURE__*/React.createElement(Button, {
 	    type: "secondary",
 	    error: true,
-	    onClick: function onClick() {
+	    onClick: () => {
 	      hideModal();
 	    }
 	  }, "Cancel"), "\xA0\xA0", /*#__PURE__*/React.createElement(LoadingSubmitButton, {
 	    submit: true,
 	    value: "true",
 	    name: "add",
-	    onLoad: function onLoad() {
+	    onLoad: () => {
 	      hideModal();
 	    }
 	  }, "Add")));
 	}
-	function ItemList(_ref4) {
-	  var title = _ref4.title;
-	  var entries = useLoaderData();
-	  var _useModal4 = useModal(),
-	    showModal = _useModal4.showModal;
+	function ItemList({
+	  title
+	}) {
+	  const entries = useLoaderData();
+	  const {
+	    showModal
+	  } = useModal();
 	  function onAddItem() {
 	    showModal({
 	      title: 'Add Item',
@@ -36675,9 +35649,10 @@
 	}
 
 	function Search() {
-	  var _useLoaderData = useLoaderData(),
-	    query = _useLoaderData.query,
-	    results = _useLoaderData.results;
+	  const {
+	    query,
+	    results
+	  } = useLoaderData();
 	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Search for ", /*#__PURE__*/React.createElement("span", {
 	    className: "light"
 	  }, "\"", query, "\"")), results.length ? /*#__PURE__*/React.createElement(RecipeCardList, {
@@ -36688,14 +35663,8 @@
 	}
 
 	function RestoreSection() {
-	  var _useState = reactExports.useState(true),
-	    _useState2 = _slicedToArray(_useState, 2),
-	    disabled = _useState2[0],
-	    setDisabled = _useState2[1];
-	  var _useState3 = reactExports.useState(null),
-	    _useState4 = _slicedToArray(_useState3, 2),
-	    fileText = _useState4[0],
-	    setFileText = _useState4[1];
+	  const [disabled, setDisabled] = reactExports.useState(true);
+	  const [fileText, setFileText] = reactExports.useState(null);
 	  function onLoad(result) {
 	    setFileText(result);
 	    setDisabled(false);
@@ -36729,7 +35698,7 @@
 	}
 
 	function Error$1() {
-	  var error = useRouteError();
+	  const error = useRouteError();
 	  return /*#__PURE__*/React.createElement("div", {
 	    className: "centered"
 	  }, /*#__PURE__*/React.createElement("h2", null, "Oops!"), /*#__PURE__*/React.createElement("p", null, error.status && error.status === 404 ? 'The requested page does not exist!' : /*#__PURE__*/React.createElement(React.Fragment, null, "An internal error occured in the system.", /*#__PURE__*/React.createElement("br", null), "Try refreshing the browser to rectify it.")));
@@ -36750,59 +35719,40 @@
 	  var recipe = {};
 	  var processingIngredients = false;
 	  recipe.items = [];
-	  var _iterator = _createForOfIteratorHelper(formData),
-	    _step;
-	  try {
-	    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-	      var _step$value = _slicedToArray(_step.value, 2),
-	        key = _step$value[0],
-	        value = _step$value[1];
+	  for (var [key, value] of formData) {
+	    if (key === 'group') {
+	      processingIngredients = true;
+	    } else if (key === 'groupend') {
+	      processingIngredients = false;
+	      continue;
+	    }
+	    if (processingIngredients) {
 	      if (key === 'group') {
-	        processingIngredients = true;
-	      } else if (key === 'groupend') {
-	        processingIngredients = false;
-	        continue;
-	      }
-	      if (processingIngredients) {
-	        if (key === 'group') {
-	          recipe.items.push({
-	            name: value,
-	            ingredients: [],
-	            quantities: []
-	          });
-	        } else {
-	          recipe.items[recipe.items.length - 1][key].push(value);
-	        }
+	        recipe.items.push({
+	          name: value,
+	          ingredients: [],
+	          quantities: []
+	        });
 	      } else {
-	        recipe[key] = value;
+	        recipe.items[recipe.items.length - 1][key].push(value);
 	      }
+	    } else {
+	      recipe[key] = value;
 	    }
-
-	    // Category and ingredient normalization
-	  } catch (err) {
-	    _iterator.e(err);
-	  } finally {
-	    _iterator.f();
 	  }
+
+	  // Category and ingredient normalization
 	  recipe.category = normalizeItem(recipe.category);
-	  var _iterator2 = _createForOfIteratorHelper(recipe.items),
-	    _step2;
-	  try {
-	    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-	      var group = _step2.value;
-	      var ingredients = group.ingredients;
-	      for (var i = 0; i < ingredients.length; i++) {
-	        ingredients[i] = normalizeItem(ingredients[i]);
-	      }
+	  for (var group of recipe.items) {
+	    var ingredients = group.ingredients;
+	    for (var i = 0; i < ingredients.length; i++) {
+	      ingredients[i] = normalizeItem(ingredients[i]);
 	    }
-
-	    // Rating type coercion
-	  } catch (err) {
-	    _iterator2.e(err);
-	  } finally {
-	    _iterator2.f();
 	  }
+
+	  // Rating type coercion
 	  recipe.rating = +recipe.rating;
+	  console.log(recipe);
 	  return recipe;
 	}
 
@@ -36812,287 +35762,116 @@
 	      title: title,
 	      key: title
 	    }),
-	    loader: function () {
-	      var _loader = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-	        return _regeneratorRuntime().wrap(function _callee$(_context) {
-	          while (1) switch (_context.prev = _context.next) {
-	            case 0:
-	              _context.next = 2;
-	              return itemSet.getAll();
-	            case 2:
-	              return _context.abrupt("return", _context.sent);
-	            case 3:
-	            case "end":
-	              return _context.stop();
-	          }
-	        }, _callee);
-	      }));
-	      function loader() {
-	        return _loader.apply(this, arguments);
-	      }
-	      return loader;
-	    }(),
-	    action: function action(_ref) {
-	      _ref.params;
-	        var request = _ref.request;
-	      return new Promise(function (resolve) {
+	    loader: async function () {
+	      return await itemSet.getAll();
+	    },
+	    action: function ({
+	      params,
+	      request
+	    }) {
+	      return new Promise(resolve => {
 	        var resolvingValue = null;
-	        _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-	          var formData, isItemInUse;
-	          return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-	            while (1) switch (_context2.prev = _context2.next) {
-	              case 0:
-	                _context2.next = 2;
-	                return request.formData();
-	              case 2:
-	                formData = _context2.sent;
-	                if (!formData.has('delete')) {
-	                  _context2.next = 10;
-	                  break;
-	                }
-	                _context2.next = 6;
-	                return itemSet.isInUse(formData.get('delete'));
-	              case 6:
-	                isItemInUse = _context2.sent;
-	                if (!isItemInUse) {
-	                  itemSet.remove(formData.get('delete'));
-	                } else {
-	                  resolvingValue = false;
-	                }
-	                _context2.next = 11;
-	                break;
-	              case 10:
-	                if (formData.has('update')) {
-	                  itemSet.update(formData.get('update'), formData.get('name'));
-	                }
+	        (async function () {
+	          var formData = await request.formData();
 
-	                // Add new item
-	                else if (formData.has('add')) {
-	                  itemSet.add(formData.get('name'));
-	                }
-	              case 11:
-	              case "end":
-	                return _context2.stop();
+	          // Delete item
+	          if (formData.has('delete')) {
+	            var isItemInUse = await itemSet.isInUse(formData.get('delete'));
+	            if (!isItemInUse) {
+	              itemSet.remove(formData.get('delete'));
+	            } else {
+	              resolvingValue = false;
 	            }
-	          }, _callee2);
-	        }))();
-	        setTimeout(function () {
+	          }
+
+	          // Update item
+	          else if (formData.has('update')) {
+	            itemSet.update(formData.get('update'), formData.get('name'));
+	          }
+
+	          // Add new item
+	          else if (formData.has('add')) {
+	            itemSet.add(formData.get('name'));
+	          }
+	        })();
+	        setTimeout(() => {
 	          resolve(resolvingValue);
 	        }, 1000);
 	      });
 	    }
 	  };
 	}
-	var router = createBrowserRouter([{
+	const router = createBrowserRouter([{
 	  path: '/',
 	  element: /*#__PURE__*/React.createElement(RootView, null),
 	  errorElement: /*#__PURE__*/React.createElement(ErrorView, null),
 	  children: [{
 	    path: '/',
 	    element: /*#__PURE__*/React.createElement(Home, null),
-	    loader: function () {
-	      var _loader2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-	        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-	          while (1) switch (_context3.prev = _context3.next) {
-	            case 0:
-	              _context3.next = 2;
-	              return recipeList.getAllRecipes();
-	            case 2:
-	              return _context3.abrupt("return", _context3.sent);
-	            case 3:
-	            case "end":
-	              return _context3.stop();
-	          }
-	        }, _callee3);
-	      }));
-	      function loader() {
-	        return _loader2.apply(this, arguments);
-	      }
-	      return loader;
-	    }(),
-	    action: function () {
-	      var _action = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(_ref3) {
-	        var request;
-	        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-	          while (1) switch (_context4.prev = _context4.next) {
-	            case 0:
-	              _ref3.params, request = _ref3.request;
-	              _context4.t0 = recipeList;
-	              _context4.t1 = processRecipeForm;
-	              _context4.next = 5;
-	              return request.formData();
-	            case 5:
-	              _context4.t2 = _context4.sent;
-	              _context4.t3 = (0, _context4.t1)(_context4.t2);
-	              _context4.next = 9;
-	              return _context4.t0.addRecipe.call(_context4.t0, _context4.t3);
-	            case 9:
-	              return _context4.abrupt("return", null);
-	            case 10:
-	            case "end":
-	              return _context4.stop();
-	          }
-	        }, _callee4);
-	      }));
-	      function action(_x) {
-	        return _action.apply(this, arguments);
-	      }
-	      return action;
-	    }()
+	    loader: async function () {
+	      return await recipeList.getAllRecipes();
+	    },
+	    action: async function ({
+	      params,
+	      request
+	    }) {
+	      await recipeList.addRecipe(processRecipeForm(await request.formData()));
+	      return null;
+	    }
 	  }, {
 	    path: '/recipe/:recipeId',
 	    children: [{
 	      path: '',
 	      element: /*#__PURE__*/React.createElement(Recipe, null),
-	      loader: function () {
-	        var _loader3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(_ref4) {
-	          var params;
-	          return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-	            while (1) switch (_context5.prev = _context5.next) {
-	              case 0:
-	                params = _ref4.params;
-	                _context5.next = 3;
-	                return recipeList.getRecipeDetailed(params.recipeId);
-	              case 3:
-	                return _context5.abrupt("return", _context5.sent);
-	              case 4:
-	              case "end":
-	                return _context5.stop();
-	            }
-	          }, _callee5);
-	        }));
-	        function loader(_x2) {
-	          return _loader3.apply(this, arguments);
-	        }
-	        return loader;
-	      }()
+	      loader: async function ({
+	        params
+	      }) {
+	        return await recipeList.getRecipeDetailed(params.recipeId);
+	      }
 	    }, {
 	      path: 'delete',
-	      loader: function () {
-	        var _loader4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(_ref5) {
-	          var params;
-	          return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-	            while (1) switch (_context6.prev = _context6.next) {
-	              case 0:
-	                params = _ref5.params, _ref5.request;
-	                _context6.next = 3;
-	                return recipeList.deleteRecipe(params.recipeId);
-	              case 3:
-	                return _context6.abrupt("return", redirect('/'));
-	              case 4:
-	              case "end":
-	                return _context6.stop();
-	            }
-	          }, _callee6);
-	        }));
-	        function loader(_x3) {
-	          return _loader4.apply(this, arguments);
-	        }
-	        return loader;
-	      }()
+	      loader: async function ({
+	        params,
+	        request
+	      }) {
+	        await recipeList.deleteRecipe(params.recipeId);
+	        return redirect('/');
+	      }
 	    }, {
 	      path: 'update',
 	      element: /*#__PURE__*/React.createElement(UpdateRecipeView, null),
-	      loader: function () {
-	        var _loader5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(_ref6) {
-	          var params;
-	          return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-	            while (1) switch (_context7.prev = _context7.next) {
-	              case 0:
-	                params = _ref6.params, _ref6.request;
-	                _context7.next = 3;
-	                return recipeList.getRecipeForUpdate(params.recipeId);
-	              case 3:
-	                return _context7.abrupt("return", _context7.sent);
-	              case 4:
-	              case "end":
-	                return _context7.stop();
-	            }
-	          }, _callee7);
-	        }));
-	        function loader(_x4) {
-	          return _loader5.apply(this, arguments);
-	        }
-	        return loader;
-	      }(),
-	      action: function () {
-	        var _action2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(_ref7) {
-	          var params, request, formDataMap;
-	          return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-	            while (1) switch (_context8.prev = _context8.next) {
-	              case 0:
-	                params = _ref7.params, request = _ref7.request;
-	                _context8.t0 = processRecipeForm;
-	                _context8.next = 4;
-	                return request.formData();
-	              case 4:
-	                _context8.t1 = _context8.sent;
-	                formDataMap = (0, _context8.t0)(_context8.t1);
-	                _context8.next = 8;
-	                return recipeList.updateRecipe(params.recipeId, formDataMap);
-	              case 8:
-	                return _context8.abrupt("return", redirect("/recipe/".concat(params.recipeId)));
-	              case 9:
-	              case "end":
-	                return _context8.stop();
-	            }
-	          }, _callee8);
-	        }));
-	        function action(_x5) {
-	          return _action2.apply(this, arguments);
-	        }
-	        return action;
-	      }()
+	      loader: async function ({
+	        params,
+	        request
+	      }) {
+	        return await recipeList.getRecipeForUpdate(params.recipeId);
+	      },
+	      action: async function ({
+	        params,
+	        request
+	      }) {
+	        var formDataMap = processRecipeForm(await request.formData());
+	        await recipeList.updateRecipe(params.recipeId, formDataMap);
+	        return redirect(`/recipe/${params.recipeId}`);
+	      }
 	    }, {
 	      path: 'iterate',
-	      loader: function () {
-	        var _loader6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(_ref8) {
-	          var params, key;
-	          return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-	            while (1) switch (_context9.prev = _context9.next) {
-	              case 0:
-	                params = _ref8.params, _ref8.request;
-	                _context9.next = 3;
-	                return recipeList.makeIteration(params.recipeId);
-	              case 3:
-	                key = _context9.sent;
-	                return _context9.abrupt("return", redirect("/recipe/".concat(key, "/update")));
-	              case 5:
-	              case "end":
-	                return _context9.stop();
-	            }
-	          }, _callee9);
-	        }));
-	        function loader(_x6) {
-	          return _loader6.apply(this, arguments);
-	        }
-	        return loader;
-	      }()
+	      loader: async function ({
+	        params,
+	        request
+	      }) {
+	        var key = await recipeList.makeIteration(params.recipeId);
+	        return redirect(`/recipe/${key}/update`);
+	      }
 	    }, {
 	      path: 'copy',
-	      loader: function () {
-	        var _loader7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(_ref9) {
-	          var params, key;
-	          return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-	            while (1) switch (_context10.prev = _context10.next) {
-	              case 0:
-	                params = _ref9.params, _ref9.request;
-	                _context10.next = 3;
-	                return recipeList.cloneRecipe(params.recipeId);
-	              case 3:
-	                key = _context10.sent;
-	                return _context10.abrupt("return", redirect("/recipe/".concat(key, "/update")));
-	              case 5:
-	              case "end":
-	                return _context10.stop();
-	            }
-	          }, _callee10);
-	        }));
-	        function loader(_x7) {
-	          return _loader7.apply(this, arguments);
-	        }
-	        return loader;
-	      }()
+	      loader: async function ({
+	        params,
+	        request
+	      }) {
+	        var key = await recipeList.cloneRecipe(params.recipeId);
+	        return redirect(`/recipe/${key}/update`);
+	      }
 	    }]
 	  }, {
 	    path: '/add',
@@ -37100,39 +35879,25 @@
 	  }, {
 	    path: '/search',
 	    element: /*#__PURE__*/React.createElement(Search, null),
-	    loader: function () {
-	      var _loader8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(_ref10) {
-	        var request, url, query, results;
-	        return _regeneratorRuntime().wrap(function _callee11$(_context11) {
-	          while (1) switch (_context11.prev = _context11.next) {
-	            case 0:
-	              _ref10.params, request = _ref10.request;
-	              url = new URL(request.url);
-	              query = url.searchParams.get('q');
-	              _context11.next = 5;
-	              return recipeList.searchRecipe(query);
-	            case 5:
-	              results = _context11.sent;
-	              return _context11.abrupt("return", {
-	                query: query,
-	                results: results
-	              });
-	            case 7:
-	            case "end":
-	              return _context11.stop();
-	          }
-	        }, _callee11);
-	      }));
-	      function loader(_x8) {
-	        return _loader8.apply(this, arguments);
-	      }
-	      return loader;
-	    }()
-	  }, _objectSpread2({
-	    path: '/ingredients'
-	  }, itemListOptions('Ingredients', ingredientSet)), _objectSpread2({
-	    path: '/categories'
-	  }, itemListOptions('Categories', categorySet)), {
+	    loader: async function ({
+	      params,
+	      request
+	    }) {
+	      var url = new URL(request.url);
+	      var query = url.searchParams.get('q');
+	      var results = await recipeList.searchRecipe(query);
+	      return {
+	        query,
+	        results
+	      };
+	    }
+	  }, {
+	    path: '/ingredients',
+	    ...itemListOptions('Ingredients', ingredientSet)
+	  }, {
+	    path: '/categories',
+	    ...itemListOptions('Categories', categorySet)
+	  }, {
 	    path: '/backup',
 	    element: /*#__PURE__*/React.createElement(BackupView, null)
 	  }]

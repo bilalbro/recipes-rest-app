@@ -112,7 +112,7 @@ CREATE VIEW recipe_groups_vw AS (
                 json_arrayagg(name) name,
                 json_arrayagg(i.id) i_id,
                 json_arrayagg(quantity) q
-            FROM recipe_ingredients ri JOIN ingredients i
+            FROM recipe_ingredients ri LEFT JOIN ingredients i
             ON ri.ingredient_id = i.id
             GROUP BY ri.recipe_id, ri.group_id
         ) rc

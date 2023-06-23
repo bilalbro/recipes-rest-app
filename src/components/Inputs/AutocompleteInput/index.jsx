@@ -23,6 +23,7 @@ export default function AutocompleteInput({
 {
    const [autocompleter, dispatchForAutocompleter] = useReducer(autocompleterReducer, {
       value,
+      entryClicked: false,
       hiddenValue: hiddenValue || value,
       data,
       getInputValue,

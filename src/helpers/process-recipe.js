@@ -52,5 +52,6 @@ export default function processRecipeForm(formData)
    // Rating type coercion
    recipe.rating = +recipe.rating;
    
+   console.log(recipe);
    return recipe;
 }
