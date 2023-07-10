@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLoaderData, Form, useHref } from 'react-router-dom';
-import { BiPencil, BiPlus, BiTrash } from 'react-icons/bi';
+import { BiListCheck, BiPencil, BiPlus, BiTrash } from 'react-icons/bi';
 
 import {
    TextInput,
@@ -75,6 +75,15 @@ function ItemTableRow({
       });
    }
 
+   function onShowUsageClick() {
+      showModal({
+         title: `Usage of '${name}'`,
+         body: <>
+            This is usage
+         </>
+      })
+   }
+
    return (
       <tr>
          <td style={{width: '40%'}}>{name}</td>
@@ -86,6 +95,10 @@ function ItemTableRow({
             &nbsp;&nbsp;
             <Button type="secondary" small error onClick={onRemoveClick}>
                <BiTrash/> <span>Delete</span>
+            </Button>
+            &nbsp;&nbsp;
+            <Button type="grey" small onClick={onShowUsageClick}>
+               <BiListCheck/> <span>See Usage</span>
             </Button>
          </td>
       </tr>
