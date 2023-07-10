@@ -115,6 +115,25 @@ class RecipeList
             records.push(record);
          }
       }
+
+      records.sort((a, b) => {
+         if (a.category < b.category) return -1;
+         if (a.category > b.category) return 1;
+         return 0;
+      });
+      records = records.reduce<any[]>((records, record) => {
+         var lastRecord = records[records.length - 1];
+         if (!lastRecord || record.category !== lastRecord.name) {
+            records.push({
+               name: record.category,
+               recipes: []
+            });
+            lastRecord = records[records.length - 1];
+         }
+         lastRecord.recipes.push(record);
+         return records;
+      }, []);
+
       return records;
    }
 
@@ -159,7 +178,6 @@ class RecipeList
    async getRecipeDetailed(key: string)
    {
       await this.init();
-      console.log('getting detailed recipe');
 
       await this._getRecipe(key);
       var recordProcessed: RecipeDetailed = await this.getRecipe(key) as any;
@@ -360,6 +378,7 @@ class RecipeList
    async searchRecipe(query: string)
    {
       await this.init();
+      console.log('searching recipe');
 
       var results: RecipeCompact[] = [];
       for (var key in this.data) {

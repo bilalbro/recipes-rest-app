@@ -21,7 +21,6 @@ export default function RecipeCardList({
    list
 })
 {
-   console.log(list);
    return (
       <div className="recipe-cards">
          <Recipes list={list} />
