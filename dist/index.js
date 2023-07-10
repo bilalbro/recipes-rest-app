@@ -34687,6 +34687,23 @@
 	        records.push(record);
 	      }
 	    }
+	    records.sort((a, b) => {
+	      if (a.category < b.category) return -1;
+	      if (a.category > b.category) return 1;
+	      return 0;
+	    });
+	    records = records.reduce((records, record) => {
+	      var lastRecord = records[records.length - 1];
+	      if (!lastRecord || record.category !== lastRecord.name) {
+	        records.push({
+	          name: record.category,
+	          recipes: []
+	        });
+	        lastRecord = records[records.length - 1];
+	      }
+	      lastRecord.recipes.push(record);
+	      return records;
+	    }, []);
 	    return records;
 	  }
 	  async compareIngredient(key, itemIndex, ingredientKey) {
@@ -34714,7 +34731,6 @@
 	  }
 	  async getRecipeDetailed(key) {
 	    await this.init();
-	    console.log('getting detailed recipe');
 	    await this._getRecipe(key);
 	    var recordProcessed = await this.getRecipe(key);
 
@@ -34872,6 +34888,7 @@
 	  }
 	  async searchRecipe(query) {
 	    await this.init();
+	    console.log('searching recipe');
 	    var results = [];
 	    for (var key in this.data) {
 	      var record = this.data[key];
@@ -35257,7 +35274,6 @@
 	function RecipeCardList({
 	  list
 	}) {
-	  console.log(list);
 	  return /*#__PURE__*/React.createElement("div", {
 	    className: "recipe-cards"
 	  }, /*#__PURE__*/React.createElement(Recipes, {
@@ -35266,12 +35282,14 @@
 	}
 
 	function Home() {
-	  const recipes = useLoaderData();
-	  return recipes.length ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Home ", /*#__PURE__*/React.createElement("span", {
+	  const categoryGroups = useLoaderData();
+	  return categoryGroups.length ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Home ", /*#__PURE__*/React.createElement("span", {
 	    className: "light"
-	  }, "(", recipes && recipes.length, ")")), /*#__PURE__*/React.createElement(RecipeCardList, {
-	    list: recipes
-	  })) : /*#__PURE__*/React.createElement("div", {
+	  }, "(", categoryGroups && categoryGroups.length, ")")), categoryGroups.map(categoryGroup => /*#__PURE__*/React.createElement("div", {
+	    className: "recipe-cards-group"
+	  }, /*#__PURE__*/React.createElement("h2", null, categoryGroup.name), /*#__PURE__*/React.createElement(RecipeCardList, {
+	    list: categoryGroup.recipes
+	  })))) : /*#__PURE__*/React.createElement("div", {
 	    className: "centered"
 	  }, /*#__PURE__*/React.createElement("h2", null, "No recipes"), /*#__PURE__*/React.createElement("p", null, "Go to ", /*#__PURE__*/React.createElement(Link, {
 	    to: "/add"

@@ -43,6 +43,10 @@ h1 {
   font-size: 26px;
 }
 
+h2 {
+  font-size: 20px;
+}
+
 p {
   line-height: 1.5em;
   margin: 20px 0;
@@ -714,7 +718,7 @@ h1 + form {
 }
 
 h1 {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 @media screen and (max-width: 870px) {
@@ -752,6 +756,14 @@ h1 {
 /*******************************************************************************
 Recipe card
 *******************************************************************************/
+.recipe-cards-group {
+  margin-top: 40px;
+}
+.recipe-cards-group > h2 {
+  font-size: 18px;
+  opacity: 0.5;
+}
+
 .recipe-cards {
   margin: 0 -10px;
 }

@@ -6,13 +6,18 @@ import RecipeCardList from '../components/RecipeCardList';
 
 export default function Home()
 {
-   const recipes = useLoaderData();
+   const categoryGroups = useLoaderData();
 
    return (
-      recipes.length
+      categoryGroups.length
       ? <>
-         <h1>Home <span className="light">({recipes && recipes.length})</span></h1>
-         <RecipeCardList list={recipes} />
+         <h1>Home <span className="light">({categoryGroups && categoryGroups.length})</span></h1>
+         {categoryGroups.map(categoryGroup => (
+            <div className="recipe-cards-group">
+               <h2>{categoryGroup.name}</h2>
+               <RecipeCardList list={categoryGroup.recipes} />
+            </div>
+         ))}
       </>
       : (
          <div className="centered">
