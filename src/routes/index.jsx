@@ -21,7 +21,7 @@ import processRecipe from '../helpers/process-recipe';
 function itemListOptions(title, itemSet)
 {
    return {
-      element: <ItemsView title={title} key={title} />,
+      element: <ItemsView title={title} key={title} itemSet={itemSet} />,
       loader: async function() {
          return await itemSet.getAll();
       },
@@ -79,7 +79,7 @@ const router = createBrowserRouter([
             }
          },
          {
-            path: '/recipe/:recipeId',
+            path: '/recipes/:recipeId',
             children: [
                {
                   path: '',

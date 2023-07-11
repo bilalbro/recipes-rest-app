@@ -17,7 +17,7 @@ export default function RecipeCard({
 
    return (
       <div className="recipe-card-wrapper">
-         <Link className="recipe-card" to={`/recipe/${id}`}>
+         <Link className="recipe-card" to={`/recipes/${id}`}>
             <h4 className="recipe-card_category">{category}</h4>
             <div className="recipe-card_rating">
                <Rating rating={rating}  />

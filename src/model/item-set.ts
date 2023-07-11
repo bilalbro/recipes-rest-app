@@ -73,6 +73,12 @@ class ItemSet
       return data;
    }
 
+   async getUsageDetails(id)
+   {
+      await this.init();
+      return await getRequest(`/${this.resourceName}/${id}/usage`);
+   }
+
    async getAllForUpdate()
    {
       await this.init();
