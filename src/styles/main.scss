@@ -38,6 +38,22 @@ h1 + form {
 }
 
 
+.list {
+   list-style-type: decimal;
+   padding-left: 30px;
+}
+
+.list li {
+   margin: 5px 0;
+   padding-left: 7px;
+
+   a {
+      color: $colors-primary;
+      text-decoration: underline;
+   }
+}
+
+
 
 @keyframes loading {
    50% {

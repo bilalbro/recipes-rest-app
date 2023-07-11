@@ -11,14 +11,35 @@
    z-index: 11;
    border-radius: 4px;
    box-sizing: border-box;
-   padding: 20px;
 }
 
 .modal_head {
    border-bottom: 1px solid $colors-border;
-   margin: 0 -20px;
-   padding: 0 20px 20px;
-   margin-bottom: 20px;
+   padding: 20px;
+   position: relative;
+
+   button {
+      border-color: transparent;
+      color: black;
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 15px;
+
+      svg {
+         font-size: 30px;
+      }
+   }
+}
+
+.modal_body {
+   padding: 20px;
+   max-height: 300px;
+   overflow: auto;
+
+   > form p {
+      margin-top: 0px
+   } 
 }
 
 .modal .input-group:last-child {

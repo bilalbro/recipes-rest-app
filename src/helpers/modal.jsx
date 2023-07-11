@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useOverlayFunctions } from './overlay';
+import { BiX } from 'react-icons/bi';
+import { Button } from '../components/Inputs';
 
 var setModal = null;
 
@@ -57,8 +59,13 @@ function ModalBox({
 
    return (
       <div ref={modalDivElement} className="modal">
-         <h3 className="modal_head">{content.title}</h3>
-         {content.body}
+         <h3 className="modal_head">
+            {content.title}
+            <Button type="secondary" onClick={hideModal}><BiX/></Button>
+         </h3>
+         <div className="modal_body">
+            {content.body}
+         </div>
       </div>
    );
 }

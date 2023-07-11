@@ -458,14 +458,32 @@ Autocomplete
   z-index: 11;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 20px;
 }
 
 .modal_head {
   border-bottom: 1px solid #bfbfbf;
-  margin: 0 -20px;
-  padding: 0 20px 20px;
-  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+}
+.modal_head button {
+  border-color: transparent;
+  color: black;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 15px;
+}
+.modal_head button svg {
+  font-size: 30px;
+}
+
+.modal_body {
+  padding: 20px;
+  max-height: 300px;
+  overflow: auto;
+}
+.modal_body > form p {
+  margin-top: 0px;
 }
 
 .modal .input-group:last-child {
@@ -688,6 +706,20 @@ body .sidebar .sidebar_entry--sel {
 
 h1 + form {
   margin-top: 0;
+}
+
+.list {
+  list-style-type: decimal;
+  padding-left: 30px;
+}
+
+.list li {
+  margin: 5px 0;
+  padding-left: 7px;
+}
+.list li a {
+  color: #5a0a88;
+  text-decoration: underline;
 }
 
 @keyframes loading {

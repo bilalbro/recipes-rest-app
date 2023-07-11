@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLoaderData, Form, useHref } from 'react-router-dom';
-import { BiListCheck, BiPencil, BiPlus, BiTrash } from 'react-icons/bi';
+import { useLoaderData, Form, useHref, Link } from 'react-router-dom';
+import { BiListOl, BiPencil, BiPlus, BiTrash } from 'react-icons/bi';
 
 import {
    TextInput,
@@ -47,7 +47,8 @@ function ItemForm({
 
 
 function ItemTableRow({
-   item
+   item,
+   itemSet
 })
 {
    const { showModal } = useModal();
@@ -75,12 +76,16 @@ function ItemTableRow({
       });
    }
 
-   function onShowUsageClick() {
+   async function onShowUsageClick() {
+      console.log(itemSet);
+      var details = await itemSet.getUsageDetails(itemKey);
       showModal({
          title: `Usage of '${name}'`,
-         body: <>
-            This is usage
-         </>
+         body: <ol className="list">
+            {details.map((recipe, i) => (
+               <li key={i}><Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link></li>
+            ))}
+         </ol>
       })
    }
 
@@ -98,7 +103,7 @@ function ItemTableRow({
             </Button>
             &nbsp;&nbsp;
             <Button type="grey" small onClick={onShowUsageClick}>
-               <BiListCheck/> <span>See Usage</span>
+               <BiListOl/> <span>Usage</span>
             </Button>
          </td>
       </tr>
@@ -107,7 +112,8 @@ function ItemTableRow({
 
 
 function ItemTable({
-   entries
+   entries,
+   itemSet
 })
 {
    return (
@@ -117,7 +123,7 @@ function ItemTable({
          </thead>
          <tbody>
             {entries.map(entry => (
-               <ItemTableRow key={entry[0]} item={entry} />
+               <ItemTableRow key={entry[0]} item={entry} itemSet={itemSet} />
             ))}
          </tbody>
       </table>
@@ -148,7 +154,8 @@ function AddItemForm()
 
 
 export default function ItemList({
-   title
+   title,
+   itemSet
 })
 {
    const entries = useLoaderData();
@@ -166,7 +173,7 @@ export default function ItemList({
 
       <Button onClick={onAddItem} type="primary"><BiPlus /> <span>Add</span></Button>
       {entries.length
-      ? <ItemTable entries={entries} />
+      ? <ItemTable entries={entries} itemSet={itemSet} />
       : null
       }
    </>

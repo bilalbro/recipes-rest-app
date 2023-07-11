@@ -48,6 +48,11 @@ async function getAll(req, res) {
     res.json(results);
 }
 
+async function getUsage(req, res) {
+    const results = await req.data.db.getUsage(req.params.id);
+    res.json(results);
+}
+
 async function deleteAll(req, res) {
     await req.data.db.deleteAll();
     res.status(204).send();
@@ -91,6 +96,7 @@ exports.itemsRouter = (tableName) => {
     });
 
     subapp.get(`/${tableName}`, getAll);
+    subapp.get(`/${tableName}/:id/usage`, getUsage);
     subapp.delete(`/${tableName}`, checkNoRecipes, deleteAll);
     subapp.post(`/${tableName}`, checkName, add);
     subapp.put(`/${tableName}/:id`, checkId, checkName, update);

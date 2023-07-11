@@ -10,6 +10,7 @@ import {
 } from './api';
 import {
    Recipe,
+   RecipeItem,
    RecipeFormData,
    RecipeCompact,
    RecipeDetailed,

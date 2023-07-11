@@ -4,6 +4,7 @@ const db = require('.');
 class ItemsDatabase {
     constructor(tableName) {
         this.tableName = tableName;
+        this.idName = tableName === 'ingredients' ? 'ingredient' : 'category';
     }
 
     async getAll(forRestoration) {
@@ -27,6 +28,17 @@ class ItemsDatabase {
             WHERE id=${id}`
         );
         return results[0];
+    }
+
+    async getUsage(id) {
+        var [results] = await db.query(
+            `SELECT recipe_id id, name
+            FROM recipe_${this.tableName} ri JOIN recipes
+            ON ri.recipe_id = recipes.id
+            WHERE ${this.idName}_id = ${id}
+            ORDER BY name`
+        );
+        return results;
     }
 
     async deleteAll() {
